@@ -1,7 +1,7 @@
 package com.example.themoviedbclient.data.di
 
 import com.example.themoviedbclient.BuildConfig
-import com.example.themoviedbclient.data.api.AuthInterceptor
+import com.example.themoviedbclient.data.util.AuthInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
 @InstallIn(SingletonComponent::class)
-class HttpClientModule {
+class RetrofitModule {
     @Provides
     fun provideRetrofit(httpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()

@@ -1,9 +1,8 @@
 package com.example.themoviedbclient.data.di
 
-import androidx.lifecycle.ViewModel
 import com.example.themoviedbclient.data.api.MovieApiService
-import com.example.themoviedbclient.data.repository.movie.MovieRemoteDataSource
-import com.example.themoviedbclient.data.repository.movie.MovieRemoteDataSourceImpl
+import com.example.themoviedbclient.data.datasource.remote.movie.MovieRemoteDataSource
+import com.example.themoviedbclient.data.datasource.remote.movie.MovieRemoteDataSourceImpl
 import com.example.themoviedbclient.domain.repository.movie.MovieRepository
 import com.example.themoviedbclient.domain.repository.movie.MovieRepositoryImpl
 import dagger.Module

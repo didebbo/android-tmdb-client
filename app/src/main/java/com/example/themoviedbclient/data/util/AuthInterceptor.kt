@@ -1,4 +1,4 @@
-package com.example.themoviedbclient.data.api
+package com.example.themoviedbclient.data.util
 
 import com.example.themoviedbclient.BuildConfig
 import okhttp3.Interceptor

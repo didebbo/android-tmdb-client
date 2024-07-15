@@ -1,8 +1,7 @@
-package com.example.themoviedbclient.data.repository.movie
+package com.example.themoviedbclient.data.datasource.remote.movie
 
 import com.example.themoviedbclient.data.api.MovieApiService
-import com.example.themoviedbclient.data.model.MovieList
-import com.example.themoviedbclient.data.repository.movie.MovieRemoteDataSource
+import com.example.themoviedbclient.data.model.TrendingMovies
 import retrofit2.Response
 
 class MovieRemoteDataSourceImpl(
@@ -11,7 +10,7 @@ class MovieRemoteDataSourceImpl(
     override suspend fun getTrendingMovies(
         timeWindow: String,
         language: String
-    ): Response<MovieList> {
+    ): Response<TrendingMovies> {
         return movieApiService.getTrendingMovies(timeWindow,language)
     }
 }

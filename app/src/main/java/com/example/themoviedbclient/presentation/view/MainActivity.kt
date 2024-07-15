@@ -1,4 +1,4 @@
-package com.example.themoviedbclient.presentation
+package com.example.themoviedbclient.presentation.view
 
 import android.os.Bundle
 import android.util.Log
@@ -27,7 +27,7 @@ class MainActivity: AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        mainActivityViewModel.movieList.observe(this) {
+        mainActivityViewModel.trendingMovies.observe(this) {
             when(it) {
                 is Resource.Success -> {
                     Log.i("[GN]", it.data.toString())
