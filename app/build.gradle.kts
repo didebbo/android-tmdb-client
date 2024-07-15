@@ -10,8 +10,10 @@ val TMDB_TOKEN = tmdbProperties.getProperty("TMDB_TOKEN")
 
 
 plugins {
+    id("kotlin-kapt")
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -61,11 +63,24 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
 
+    // Retrofit2
     implementation(libs.retrofit)
     implementation(libs.gson)
     implementation(libs.loggingInterceptor)
 
+    // Dagger Hilt
+    implementation(libs.hilt)
+    kapt(libs.hilt.compiler)
+
+    // CoroutineScope
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.8.3")
+    implementation ("androidx.fragment:fragment-ktx:1.8.1")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+}
+
+kapt {
+    correctErrorTypes = true
 }
