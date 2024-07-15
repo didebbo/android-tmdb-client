@@ -1,7 +1,7 @@
 *.iml
 .gradle
 /local.properties
-/app/props.properties
+/app/tmdb.properties
 /.idea/caches
 /.idea/libraries
 /.idea/modules.xml

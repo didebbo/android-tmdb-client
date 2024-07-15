@@ -2,10 +2,10 @@ import java.util.Properties
 
 
 // Handle Props
-val props = Properties()
-file("props.properties").inputStream().use { props.load(it) }
-val TMDB_KEY = props.getProperty("TMDB_KEY")
-val TMDB_TOKEN = props.getProperty("TMDB_TOKEN")
+val tmdbProperties = Properties()
+file("tmdb.properties").inputStream().use { tmdbProperties.load(it) }
+val TMDB_KEY = tmdbProperties.getProperty("TMDB_KEY")
+val TMDB_TOKEN = tmdbProperties.getProperty("TMDB_TOKEN")
 
 
 plugins {
@@ -57,6 +57,10 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+
+    implementation(libs.retrofit)
+    implementation(libs.gson)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
