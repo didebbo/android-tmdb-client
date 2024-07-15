@@ -4,6 +4,7 @@ import java.util.Properties
 // Handle Props
 val tmdbProperties = Properties()
 file("tmdb.properties").inputStream().use { tmdbProperties.load(it) }
+val TMDB_URL = tmdbProperties.getProperty("TMDB_URL")
 val TMDB_KEY = tmdbProperties.getProperty("TMDB_KEY")
 val TMDB_TOKEN = tmdbProperties.getProperty("TMDB_TOKEN")
 
@@ -32,6 +33,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "TMDB_KEY", TMDB_KEY)
         buildConfigField("String", "TMDB_TOKEN", TMDB_TOKEN)
+        buildConfigField("String", "TMDB_URL", TMDB_URL)
     }
 
     buildTypes {
