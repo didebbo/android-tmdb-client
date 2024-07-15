@@ -20,6 +20,7 @@ android {
 
     buildFeatures {
         buildConfig = true
+        viewBinding = true
     }
 
     defaultConfig {
@@ -62,6 +63,7 @@ dependencies {
 
     implementation(libs.retrofit)
     implementation(libs.gson)
+    implementation(libs.loggingInterceptor)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
