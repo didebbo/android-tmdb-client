@@ -1,8 +1,13 @@
 package com.example.themoviedbclient.domain.repository.movie
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.liveData
 import com.example.themoviedbclient.data.model.TrendingMovies
 import com.example.themoviedbclient.data.datasource.remote.movie.MovieRemoteDataSource
 import com.example.themoviedbclient.data.util.Resource
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import retrofit2.Response
 
 class MovieRepositoryImpl(

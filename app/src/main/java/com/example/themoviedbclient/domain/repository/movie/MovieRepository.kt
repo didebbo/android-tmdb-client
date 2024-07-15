@@ -1,5 +1,6 @@
 package com.example.themoviedbclient.domain.repository.movie
 
+import androidx.lifecycle.LiveData
 import com.example.themoviedbclient.data.model.TrendingMovies
 import com.example.themoviedbclient.data.util.Resource
 

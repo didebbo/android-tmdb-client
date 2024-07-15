@@ -27,24 +27,29 @@ class MainActivity: AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        mainActivityViewModel.trendingMovies.observe(this) {
+        mainActivityViewModel.trendingMoviesResource.observe(this) {
             when(it) {
+                is Resource.Loading -> {
+                    Log.i("[GN]", "Loading...")
+                }
                 is Resource.Success -> {
-                    Log.i("[GN]", it.data.toString())
+                    if(it.data != null) {
+                        Log.i("[GN]", it.data.toString())
+                    }
                 }
                 is Resource.Error -> {
                     if(it.message != null)
-                        Log.i("[GN] Error:", it.message)
+                        Log.i("[GN]", "Error: ${it.message}")
                 }
-                else -> {
-                    TODO("Loader")
+                is Resource.Null -> {
+                    Log.i("[GN]", "Null")
                 }
             }
         }
 
         binding.buttonCall.setOnClickListener {
             lifecycleScope.launch {
-                mainActivityViewModel.fetchTrendingMovies()
+                mainActivityViewModel.fetchTrendingMoviesResource()
             }
         }
     }
