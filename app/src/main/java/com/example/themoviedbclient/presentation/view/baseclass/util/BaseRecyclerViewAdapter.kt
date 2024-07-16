@@ -27,7 +27,5 @@ abstract class BaseRecyclerViewAdapter<VH: BaseViewHolder<View,I>, I: BaseViewHo
     }
 
     abstract fun createViewHolder(view: View): VH
-    open fun getLayoutFrom(position: Int): Int {
-        return R.layout.empty_recycler_item_view
-    }
+    abstract fun getLayoutFrom(position: Int): Int
 }

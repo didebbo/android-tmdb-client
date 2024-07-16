@@ -28,7 +28,6 @@ class TrendingMoviesAdapter(data: List<TrendingMoviesItem>): BaseRecyclerViewAda
     }
 
     override fun getLayoutFrom(position: Int): Int {
-        Log.i("[GN]", "position: $position")
         return R.layout.trending_movie_recycler_item_view
     }
 }
