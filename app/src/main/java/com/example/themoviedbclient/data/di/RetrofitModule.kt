@@ -10,12 +10,13 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Named
 
 @Module
 @InstallIn(SingletonComponent::class)
 class RetrofitModule {
     @Provides
-    fun provideRetrofit(httpClient: OkHttpClient): Retrofit {
+    fun provideTMDBRetrofit(httpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.TMDB_URL)
             .addConverterFactory(GsonConverterFactory.create())

@@ -6,4 +6,5 @@ import com.example.themoviedbclient.data.util.Resource
 
 interface MovieRepository {
     suspend fun getTrendingMovies(timeWindow: String, language: String): Resource<TrendingMovies>
+    fun getPosterFulPath(imageFile: String): String
 }

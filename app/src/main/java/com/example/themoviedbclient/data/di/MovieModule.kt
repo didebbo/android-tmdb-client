@@ -1,6 +1,7 @@
 package com.example.themoviedbclient.data.di
 
 import com.example.themoviedbclient.data.api.MovieApiService
+import com.example.themoviedbclient.data.datasource.remote.image.ImagePathRemoteDataSource
 import com.example.themoviedbclient.data.datasource.remote.movie.MovieRemoteDataSource
 import com.example.themoviedbclient.data.datasource.remote.movie.MovieRemoteDataSourceImpl
 import com.example.themoviedbclient.domain.repository.movie.MovieRepository
@@ -10,13 +11,14 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import retrofit2.Retrofit
+import javax.inject.Named
 
 @Module
 @InstallIn(ViewModelComponent::class)
 class MovieModule {
     @Provides
-    fun provideMovieRepository(movieRemoteDatasource: MovieRemoteDataSource): MovieRepository {
-        return MovieRepositoryImpl(movieRemoteDatasource)
+    fun provideMovieRepository(movieRemoteDatasource: MovieRemoteDataSource, imagePathRemoteDataSource: ImagePathRemoteDataSource): MovieRepository {
+        return MovieRepositoryImpl(movieRemoteDatasource, imagePathRemoteDataSource)
     }
 
     @Provides

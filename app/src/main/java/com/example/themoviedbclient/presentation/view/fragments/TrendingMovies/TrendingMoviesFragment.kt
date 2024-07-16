@@ -45,7 +45,7 @@ class TrendingMoviesFragment: BaseFragmentList() {
                     parent?.hideLoader()
                     val data: List<Movie> = it.data?.result.orEmpty()
                     val items: List<TrendingMoviesItem> = data.map { item ->
-                        TrendingMoviesItem(item.title)
+                        TrendingMoviesItem(viewModel.getPosterFullPathFrom(item))
                     }
                     val adapter = TrendingMoviesAdapter(items)
                     setAdapter(adapter)

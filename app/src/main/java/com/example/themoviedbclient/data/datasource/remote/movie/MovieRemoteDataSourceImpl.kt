@@ -5,7 +5,7 @@ import com.example.themoviedbclient.data.model.TrendingMovies
 import retrofit2.Response
 
 class MovieRemoteDataSourceImpl(
-    private val movieApiService: MovieApiService
+    private val movieApiService: MovieApiService,
 ): MovieRemoteDataSource {
     override suspend fun getTrendingMovies(
         timeWindow: String,

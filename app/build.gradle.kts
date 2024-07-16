@@ -5,6 +5,7 @@ import java.util.Properties
 val tmdbProperties = Properties()
 file("tmdb.properties").inputStream().use { tmdbProperties.load(it) }
 val TMDB_URL = tmdbProperties.getProperty("TMDB_URL")
+val TMDB_IMAGES_URL = tmdbProperties.getProperty("TMDB_IMAGES_URL")
 val TMDB_KEY = tmdbProperties.getProperty("TMDB_KEY")
 val TMDB_TOKEN = tmdbProperties.getProperty("TMDB_TOKEN")
 
@@ -37,6 +38,7 @@ android {
         buildConfigField("String", "TMDB_KEY", TMDB_KEY)
         buildConfigField("String", "TMDB_TOKEN", TMDB_TOKEN)
         buildConfigField("String", "TMDB_URL", TMDB_URL)
+        buildConfigField("String", "TMDB_IMAGES_URL", TMDB_IMAGES_URL)
     }
 
     buildTypes {
@@ -80,6 +82,10 @@ dependencies {
     // CoroutineScope
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.8.3")
     implementation ("androidx.fragment:fragment-ktx:1.8.1")
+
+    // Glide
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

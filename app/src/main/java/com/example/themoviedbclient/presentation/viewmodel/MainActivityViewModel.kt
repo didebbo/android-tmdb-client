@@ -15,7 +15,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainActivityViewModel @Inject constructor(private val movieRepository: MovieRepository): ViewModel() {
+class MainActivityViewModel @Inject constructor(
+    private val movieRepository: MovieRepository
+): ViewModel() {
 
     private var _trendingMoviesResource: MutableLiveData<Resource<TrendingMovies>> = MutableLiveData(Resource.Null())
     val trendingMoviesResource: LiveData<Resource<TrendingMovies>> get() = _trendingMoviesResource
@@ -26,5 +28,11 @@ class MainActivityViewModel @Inject constructor(private val movieRepository: Mov
             _trendingMoviesResource.postValue(movieRepository.getTrendingMovies("day", "en-US"))
         }
     }
+
+    fun getPosterFullPathFrom(movie: Movie): String {
+        return movieRepository.getPosterFulPath(movie.posterPath)
+    }
+
+
 
 }
