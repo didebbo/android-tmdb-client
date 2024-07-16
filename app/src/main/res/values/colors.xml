@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Theme Colors -->
+    <color name="primaryColor">#0d253f</color>
+    <color name="secondaryColor">#01b4e4</color>
+    <color name="tertiaryColor">#90cea1</color>
+
+    <!-- Colors -->
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="opacity">#22000000</color>
+
     <color name="red">#C62828</color>
 </resources>
