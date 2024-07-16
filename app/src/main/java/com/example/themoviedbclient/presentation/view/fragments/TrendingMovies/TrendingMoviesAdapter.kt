@@ -27,8 +27,8 @@ class TrendingMoviesAdapter(data: List<TrendingMoviesItem>): BaseRecyclerViewAda
         return TrendingMoviesViewHolder(view)
     }
 
-    override fun getLayoutId(viewType: Int): Int {
-        Log.i("[GN]", "viewType: $viewType")
+    override fun getLayoutFrom(position: Int): Int {
+        Log.i("[GN]", "position: $position")
         return R.layout.trending_movie_recycler_item_view
     }
 }
