@@ -20,7 +20,6 @@
         android:layout_above="@id/nav_view"
         app:defaultNavHost="true"
         app:navGraph="@navigation/bottom_navigation" />
-
     <RelativeLayout
         android:visibility="visible"
         android:id="@+id/modal_system"
@@ -36,7 +35,4 @@
             android:layout_height="wrap_content"
             />
     </RelativeLayout>
-
-
-
 </RelativeLayout>

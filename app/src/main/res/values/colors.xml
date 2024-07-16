@@ -8,7 +8,7 @@
     <!-- Colors -->
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
-    <color name="opacity">#22000000</color>
+    <color name="opacity">#11000000</color>
 
     <color name="red">#C62828</color>
 </resources>

@@ -10,6 +10,7 @@ import com.example.themoviedbclient.data.util.Resource
 import com.example.themoviedbclient.domain.repository.movie.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,6 +22,7 @@ class MainActivityViewModel @Inject constructor(private val movieRepository: Mov
     suspend fun fetchTrendingMoviesResource(){
         _trendingMoviesResource.value = Resource.Loading()
         viewModelScope.launch(Dispatchers.IO) {
+            delay(4000)
             _trendingMoviesResource.postValue(movieRepository.getTrendingMovies("day", "en-US"))
         }
     }

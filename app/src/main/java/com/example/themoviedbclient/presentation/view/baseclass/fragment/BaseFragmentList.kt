@@ -13,9 +13,9 @@ import com.example.themoviedbclient.presentation.view.baseclass.util.BaseRecycle
 import com.example.themoviedbclient.presentation.view.baseclass.util.BaseViewHolder
 import com.example.themoviedbclient.presentation.view.baseclass.util.BaseViewHolderItem
 
-abstract class BaseFragmentList<VH: BaseViewHolder<View,Item>,Item: BaseViewHolderItem>: Fragment() {
+abstract class BaseFragmentList: Fragment() {
 
-    private lateinit var binding: BaseFragmentListBinding
+    lateinit var binding: BaseFragmentListBinding
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
@@ -36,7 +36,7 @@ abstract class BaseFragmentList<VH: BaseViewHolder<View,Item>,Item: BaseViewHold
 
     open fun afterOnViewCreated(view: View, savedInstanceState: Bundle?) {}
 
-    fun setAdapter(adapter: BaseRecyclerViewAdapter<VH,Item>) {
+    fun <VH: BaseViewHolder<View, I>, I: BaseViewHolderItem> setAdapter(adapter: BaseRecyclerViewAdapter<VH,I>) {
         recyclerView.adapter = adapter
     }
 }

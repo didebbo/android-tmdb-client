@@ -15,9 +15,10 @@ import com.example.themoviedbclient.presentation.view.baseclass.util.BaseViewHol
 import com.example.themoviedbclient.presentation.view.baseclass.util.BaseViewHolderItem
 import com.example.themoviedbclient.presentation.view.fragments.TrendingMovies.TrendingMoviesAdapter.*
 import com.example.themoviedbclient.presentation.viewmodel.MainActivityViewModel
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
-class TrendingMoviesFragment: BaseFragmentList<TrendingMoviesAdapter.TrendingMoviesViewHolder,TrendingMoviesAdapter.TrendingMoviesItem>() {
+class TrendingMoviesFragment: BaseFragmentList() {
 
     private val viewModel: MainActivityViewModel by activityViewModels()
     private val parent: MainActivity? by lazy {
