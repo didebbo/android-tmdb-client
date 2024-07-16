@@ -1,13 +1,10 @@
 package com.example.themoviedbclient.presentation.view.baseclass
 
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.themoviedbclient.R
@@ -15,22 +12,37 @@ import com.example.themoviedbclient.databinding.BaseActivityLayoutBinding
 
 abstract class ActivityBaseClass: AppCompatActivity() {
 
-    private lateinit var baseActivityLayoutBinding: BaseActivityLayoutBinding
+    private lateinit var binding: BaseActivityLayoutBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        baseActivityLayoutBinding = BaseActivityLayoutBinding.inflate(layoutInflater)
-        setContentView(baseActivityLayoutBinding.root)
+        binding = BaseActivityLayoutBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val navView = baseActivityLayoutBinding.navView
+        val navView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration(navView.menu)
 
 
         setupActionBarWithNavController(navController, appBarConfiguration)
-        baseActivityLayoutBinding.navView.setupWithNavController(navController)
+        binding.navView.setupWithNavController(navController)
+
+        hideModalSystem()
 
         afterOnCreate()
+    }
+
+    private fun hideModalSystem() {
+        binding.progressBar.visibility = View.GONE
+        binding.modalSystem.visibility = View.GONE
+    }
+
+    private fun hideLoader() {
+        binding.progressBar.visibility = View.GONE
+    }
+
+    private fun showLoader() {
+        binding.progressBar.visibility = View.VISIBLE
     }
 
     open fun afterOnCreate() {}
