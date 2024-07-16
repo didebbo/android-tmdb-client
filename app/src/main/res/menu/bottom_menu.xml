@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-<item
-    android:id="@+id/trending_movies"
-    android:title="Movies"
-    />
     <item
-        android:id="@+id/trending_movies_2"
-        android:title="Movies 2"
+        android:id="@+id/trending_movies"
+        android:title="Movies"
         />
 </menu>

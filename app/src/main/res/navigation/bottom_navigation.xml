@@ -8,15 +8,8 @@
     <fragment
         android:id="@+id/trending_movies"
         android:label="Trending Movies"
-        android:name="com.example.themoviedbclient.presentation.view.fragments.MoviesFragment"
-        tools:layout="@layout/movies_fragment_layout"
-        >
-    </fragment>
-    <fragment
-        android:id="@+id/trending_movies_2"
-        android:label="Trending Movies 2"
-        android:name="com.example.themoviedbclient.presentation.view.fragments.MoviesFragment2"
-        tools:layout="@layout/movies_2_fragment_layout"
+        android:name="com.example.themoviedbclient.presentation.view.fragments.TrendingMovies.TrendingMoviesFragment"
+        tools:layout="@layout/base_fragment_list"
         >
     </fragment>
 </navigation>
