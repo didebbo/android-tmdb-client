@@ -36,13 +36,13 @@ abstract class ActivityBaseClass: AppCompatActivity() {
         binding.progressBar.visibility = View.GONE
         binding.modalSystem.visibility = View.GONE
     }
-
-    private fun hideLoader() {
-        binding.progressBar.visibility = View.GONE
+    fun showLoader() {
+        binding.modalSystem.visibility = View.VISIBLE
+        binding.progressBar.visibility = View.VISIBLE
     }
 
-    private fun showLoader() {
-        binding.progressBar.visibility = View.VISIBLE
+    fun hideLoader() {
+        hideModalSystem()
     }
 
     open fun afterOnCreate() {}
