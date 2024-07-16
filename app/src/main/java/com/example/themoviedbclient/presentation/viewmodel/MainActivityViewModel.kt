@@ -24,7 +24,6 @@ class MainActivityViewModel @Inject constructor(
     suspend fun fetchTrendingMoviesResource(){
         _trendingMoviesResource.value = Resource.Loading()
         viewModelScope.launch(Dispatchers.IO) {
-            delay(4000)
             _trendingMoviesResource.postValue(movieRepository.getTrendingMovies("day", "en-US"))
         }
     }

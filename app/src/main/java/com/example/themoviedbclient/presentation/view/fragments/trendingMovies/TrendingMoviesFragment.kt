@@ -1,21 +1,15 @@
-package com.example.themoviedbclient.presentation.view.fragments.TrendingMovies
+package com.example.themoviedbclient.presentation.view.fragments.trendingMovies
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.themoviedbclient.data.model.Movie
 import com.example.themoviedbclient.data.util.Resource
 import com.example.themoviedbclient.presentation.view.MainActivity
-import com.example.themoviedbclient.presentation.view.baseclass.ActivityBaseClass
 import com.example.themoviedbclient.presentation.view.baseclass.fragment.BaseFragmentList
-import com.example.themoviedbclient.presentation.view.baseclass.util.BaseRecyclerViewAdapter
-import com.example.themoviedbclient.presentation.view.baseclass.util.BaseViewHolder
-import com.example.themoviedbclient.presentation.view.baseclass.util.BaseViewHolderItem
-import com.example.themoviedbclient.presentation.view.fragments.TrendingMovies.TrendingMoviesAdapter.*
+import com.example.themoviedbclient.presentation.view.fragments.trendingMovies.TrendingMoviesAdapter.*
 import com.example.themoviedbclient.presentation.viewmodel.MainActivityViewModel
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
 class TrendingMoviesFragment: BaseFragmentList() {
@@ -45,7 +39,11 @@ class TrendingMoviesFragment: BaseFragmentList() {
                     parent?.hideLoader()
                     val data: List<Movie> = it.data?.result.orEmpty()
                     val items: List<TrendingMoviesItem> = data.map { item ->
-                        TrendingMoviesItem(viewModel.getPosterFullPathFrom(item))
+                        TrendingMoviesItem(
+                            viewModel.getPosterFullPathFrom(item),
+                            item.title,
+                            item.overview
+                        )
                     }
                     val adapter = TrendingMoviesAdapter(items)
                     setAdapter(adapter)

@@ -1,11 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-<TextView
-    android:id="@+id/title"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Title"
-    />
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="140dp"
+    android:orientation="horizontal"
+    android:padding="10dp"
+    >
+    <ImageView
+        android:id="@+id/poster_image"
+        android:minWidth="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@color/primaryColor"
+        android:scaleType="center"
+        />
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingHorizontal="10dp">
+
+        <TextView
+            android:id="@+id/title_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="Title"/>
+        <TextView
+            android:id="@+id/overview_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:text="Overview"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/detail_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Detail"
+            />
+    </LinearLayout>
+</LinearLayout>
 </RelativeLayout>

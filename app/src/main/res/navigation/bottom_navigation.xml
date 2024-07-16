@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/trending_movies"
         android:label="Trending Movies"
-        android:name="com.example.themoviedbclient.presentation.view.fragments.TrendingMovies.TrendingMoviesFragment"
+        android:name="com.example.themoviedbclient.presentation.view.fragments.trendingMovies.TrendingMoviesFragment"
         tools:layout="@layout/base_fragment_list"
         >
     </fragment>
