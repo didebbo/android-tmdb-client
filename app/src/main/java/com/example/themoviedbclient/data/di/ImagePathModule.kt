@@ -9,7 +9,7 @@ import dagger.hilt.android.components.ViewModelComponent
 
 @Module
 @InstallIn(ViewModelComponent::class)
-class ImagePathModule {
+object ImagePathModule {
     @Provides
     fun providePosterFullPath(): ImagePathRemoteDataSource {
         return ImagePathRemoteDataSourceImpl()

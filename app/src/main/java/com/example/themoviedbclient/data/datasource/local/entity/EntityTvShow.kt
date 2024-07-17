@@ -9,11 +9,11 @@ data class EntityTvShow(
     @PrimaryKey(autoGenerate = false)
     val id: Int,
     @ColumnInfo(name = "title")
-    val title: String?,
+    val title: String,
     @ColumnInfo(name = "overview")
-    val overview: String?,
+    val overview: String,
     @ColumnInfo(name = "poster_path")
-    val posterPath: String?,
+    val posterPath: String,
     @ColumnInfo(name = "cover_path")
-    val coverPath: String?
+    val coverPath: String
 )

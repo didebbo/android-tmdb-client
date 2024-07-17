@@ -14,7 +14,7 @@ import javax.inject.Named
 
 @Module
 @InstallIn(SingletonComponent::class)
-class RetrofitModule {
+object RetrofitModule {
     @Provides
     fun provideTMDBRetrofit(httpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()

@@ -16,5 +16,5 @@ data class MovieDTO(
     val posterPath: String,
 
     @SerializedName("backdrop_path")
-    val backdropPath: String
+    val coverPath: String
 )

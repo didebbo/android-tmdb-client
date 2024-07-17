@@ -5,5 +5,8 @@ import com.example.themoviedbclient.data.util.Resource
 
 interface MovieRepository {
     suspend fun getMovies(timeWindow: String, language: String): Resource<List<ItemModel>>
-    fun getPosterFulPath(imageFile: String): String
+    suspend fun getSavedMovies(): List<ItemModel>
+    suspend fun saveMovie(item: ItemModel)
+    suspend fun deleteMovie(item: ItemModel)
+    fun getImageFullPath(path: String): String
 }

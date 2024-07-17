@@ -1,6 +1,7 @@
 package com.example.themoviedbclient.data.di
 
 import com.example.themoviedbclient.data.api.tvshow.TvShowApiService
+import com.example.themoviedbclient.data.datasource.local.dao.TvShowDao
 import com.example.themoviedbclient.data.datasource.remote.image.ImagePathRemoteDataSource
 import com.example.themoviedbclient.data.datasource.remote.tvshow.TvShowRemoteDataSource
 import com.example.themoviedbclient.data.datasource.remote.tvshow.TvShowRemoteDataSourceImpl
@@ -14,14 +15,15 @@ import retrofit2.Retrofit
 
 @Module
 @InstallIn(ViewModelComponent::class)
-class TvShowModule {
+object TvShowModule {
 
     @Provides
     fun provideTvShowRepository(
         tvShowRemoteDataSource: TvShowRemoteDataSource,
-        imagePathRemoteDataSource: ImagePathRemoteDataSource
+        imagePathRemoteDataSource: ImagePathRemoteDataSource,
+        tvShowDao: TvShowDao
     ): TvShowRepository {
-        return TvShowRepositoryImpl(tvShowRemoteDataSource,imagePathRemoteDataSource)
+        return TvShowRepositoryImpl(tvShowRemoteDataSource,imagePathRemoteDataSource,tvShowDao)
     }
 
     @Provides

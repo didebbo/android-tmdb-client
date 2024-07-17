@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.themoviedbclient.data.dto.movie.MovieDTO
 import com.example.themoviedbclient.data.model.ItemModel
 import com.example.themoviedbclient.data.util.Resource
 import com.example.themoviedbclient.domain.repository.movie.MovieRepository
@@ -28,5 +27,9 @@ class MoviesViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             _moviesResource.postValue(movieRepository.getMovies("day", "en-US"))
         }
+    }
+
+    fun getImageFullPath(path: String): String {
+        return movieRepository.getImageFullPath(path)
     }
 }

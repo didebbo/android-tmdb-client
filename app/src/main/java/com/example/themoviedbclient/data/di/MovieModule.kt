@@ -1,6 +1,7 @@
 package com.example.themoviedbclient.data.di
 
 import com.example.themoviedbclient.data.api.movie.MovieApiService
+import com.example.themoviedbclient.data.datasource.local.dao.MovieDao
 import com.example.themoviedbclient.data.datasource.remote.image.ImagePathRemoteDataSource
 import com.example.themoviedbclient.data.datasource.remote.movie.MovieRemoteDataSource
 import com.example.themoviedbclient.data.datasource.remote.movie.MovieRemoteDataSourceImpl
@@ -15,10 +16,14 @@ import javax.inject.Named
 
 @Module
 @InstallIn(ViewModelComponent::class)
-class MovieModule {
+object MovieModule {
     @Provides
-    fun provideMovieRepository(movieRemoteDatasource: MovieRemoteDataSource, imagePathRemoteDataSource: ImagePathRemoteDataSource): MovieRepository {
-        return MovieRepositoryImpl(movieRemoteDatasource, imagePathRemoteDataSource)
+    fun provideMovieRepository(
+        movieRemoteDatasource: MovieRemoteDataSource,
+        imagePathRemoteDataSource: ImagePathRemoteDataSource,
+        movieDao: MovieDao
+    ): MovieRepository {
+        return MovieRepositoryImpl(movieRemoteDatasource, imagePathRemoteDataSource,movieDao)
     }
 
     @Provides

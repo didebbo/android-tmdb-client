@@ -3,15 +3,10 @@ package com.example.themoviedbclient.presentation.view.fragments.tvshow
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavController
-import androidx.navigation.fragment.findNavController
 import com.example.themoviedbclient.R
-import com.example.themoviedbclient.data.dto.tvshow.TvShowDTO
 import com.example.themoviedbclient.data.model.ItemModel
 import com.example.themoviedbclient.data.util.Resource
-import com.example.themoviedbclient.presentation.view.activity.MainActivity
 import com.example.themoviedbclient.presentation.baseclass.fragment.BaseFragmentList
 import com.example.themoviedbclient.presentation.view.adapter.item.ItemViewAdapter
 import com.example.themoviedbclient.presentation.view.adapter.item.ItemViewData
@@ -49,8 +44,8 @@ class TvShowsFragment: BaseFragmentList() {
                         ItemViewData(
                             item.title,
                             item.overview,
-                            item.posterURL,
-                            item.coverURL,
+                            viewModel.getImageFullPath(item.posterPath),
+                            viewModel.getImageFullPath(item.coverPath),
                             onDetail = {
                                 detailItemViewModel.setItem(item)
                                 navController?.navigate(R.id.action_tvShows_to_tvShowDetail)

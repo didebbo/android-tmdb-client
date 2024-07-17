@@ -5,7 +5,7 @@ import com.example.themoviedbclient.presentation.baseclass.adapter.BaseViewHolde
 class ItemViewData(
     val title: String,
     val overview: String,
-    val posterURL: String,
-    val coverURL: String,
+    val posterPath: String,
+    val coverPath: String,
     val onDetail: () -> Unit
 ): BaseViewHolderItem()
