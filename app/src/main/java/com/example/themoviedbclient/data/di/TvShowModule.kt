@@ -1,6 +1,6 @@
 package com.example.themoviedbclient.data.di
 
-import com.example.themoviedbclient.data.api.TvShowApiService
+import com.example.themoviedbclient.data.api.tvshow.TvShowApiService
 import com.example.themoviedbclient.data.datasource.remote.image.ImagePathRemoteDataSource
 import com.example.themoviedbclient.data.datasource.remote.tvshow.TvShowRemoteDataSource
 import com.example.themoviedbclient.data.datasource.remote.tvshow.TvShowRemoteDataSourceImpl

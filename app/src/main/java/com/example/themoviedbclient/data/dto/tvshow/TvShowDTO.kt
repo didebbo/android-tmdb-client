@@ -1,8 +1,8 @@
-package com.example.themoviedbclient.data.model.tvshow
+package com.example.themoviedbclient.data.dto.tvshow
 
 import com.google.gson.annotations.SerializedName
 
-data class TvShow(
+data class TvShowDTO(
     @SerializedName("id")
     val id: Int,
 

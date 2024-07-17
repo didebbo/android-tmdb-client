@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.example.themoviedbclient.data.model.tvshow.TvShow
+import com.example.themoviedbclient.data.dto.tvshow.TvShowDTO
 import com.example.themoviedbclient.data.util.Resource
 import com.example.themoviedbclient.presentation.view.activity.MainActivity
 import com.example.themoviedbclient.presentation.baseclass.fragment.BaseFragmentList
@@ -29,7 +29,7 @@ class TvShowsFragment: BaseFragmentList() {
             viewModel.getTvShowsResource()
         }
 
-        viewModel.tvShowsResource.observe(this) {
+        viewModel.tvShowsDTOResource.observe(this) {
             when(it) {
                 is Resource.Loading -> {
                     parent?.showLoader()
@@ -40,7 +40,7 @@ class TvShowsFragment: BaseFragmentList() {
                 }
                 is Resource.Success -> {
                     parent?.hideLoader()
-                    val data: List<TvShow> = it.data?.result.orEmpty()
+                    val data: List<TvShowDTO> = it.data?.result.orEmpty()
                     val items: List<ItemViewData> = data.map { item ->
                         ItemViewData(
                             viewModel.getPosterFullPathFrom(item),
