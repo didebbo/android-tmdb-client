@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.themoviedbclient.data.dto.tvshow.TvShowDTO
+import com.example.themoviedbclient.data.model.ItemModel
 import com.example.themoviedbclient.data.util.Resource
 import com.example.themoviedbclient.presentation.view.activity.MainActivity
 import com.example.themoviedbclient.presentation.baseclass.fragment.BaseFragmentList
@@ -40,12 +41,13 @@ class TvShowsFragment: BaseFragmentList() {
                 }
                 is Resource.Success -> {
                     parent?.hideLoader()
-                    val data: List<TvShowDTO> = it.data?.result.orEmpty()
+                    val data: List<ItemModel> = it.data.orEmpty()
                     val items: List<ItemViewData> = data.map { item ->
                         ItemViewData(
-                            viewModel.getPosterFullPathFrom(item),
                             item.title,
-                            item.overview
+                            item.overview,
+                            item.posterURL,
+                            item.coverURL
                         )
                     }
                     val adapter = ItemViewAdapter(items)

@@ -45,9 +45,10 @@ class MoviesFragment: BaseFragmentList() {
                     val data: List<ItemModel> = it.data.orEmpty()
                     val items: List<ItemViewData> = data.map { item ->
                         ItemViewData(
-                            item.posterURL,
                             item.title,
-                            item.overview
+                            item.overview,
+                            item.posterURL,
+                            item.coverURL
                         )
                     }
                     val adapter = ItemViewAdapter(items)

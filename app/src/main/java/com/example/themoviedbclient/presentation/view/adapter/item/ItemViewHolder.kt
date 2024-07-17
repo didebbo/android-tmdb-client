@@ -13,7 +13,7 @@ sealed class ItemViewHolder(itemView: View): BaseViewHolder<View, ItemViewData>(
         override fun bind(item: ItemViewData) {
             binding.titleTextView.text = item.title
             binding.overviewTextView.text = item.overview
-            Glide.with(binding.root).load(item.fullPosterPath).into(binding.posterImage)
+            Glide.with(binding.root).load(item.posterURL).into(binding.posterImage)
         }
     }
 }

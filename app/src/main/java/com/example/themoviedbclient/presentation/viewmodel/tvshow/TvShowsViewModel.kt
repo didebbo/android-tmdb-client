@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.themoviedbclient.data.dto.tvshow.TvShowDTO
 import com.example.themoviedbclient.data.dto.tvshow.TvShowsDTO
+import com.example.themoviedbclient.data.model.ItemModel
 import com.example.themoviedbclient.data.util.Resource
 import com.example.themoviedbclient.domain.repository.tvshow.TvShowRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,15 +19,15 @@ class TvShowsViewModel @Inject constructor(
     private val tvShowRepository: TvShowRepository
 ): ViewModel() {
 
-    private var _tvShowsDTOResource: MutableLiveData<Resource<TvShowsDTO>> =
+    private var _tvShowsResource: MutableLiveData<Resource<List<ItemModel>>> =
         MutableLiveData(Resource.Null())
 
-    val tvShowsDTOResource: LiveData<Resource<TvShowsDTO>> get() = _tvShowsDTOResource
+    val tvShowsDTOResource: LiveData<Resource<List<ItemModel>>> get() = _tvShowsResource
 
     suspend fun getTvShowsResource(){
-        _tvShowsDTOResource.value = Resource.Loading()
+        _tvShowsResource.value = Resource.Loading()
         viewModelScope.launch(Dispatchers.IO) {
-            _tvShowsDTOResource.postValue(tvShowRepository.getTvShows("day", "en-US"))
+            _tvShowsResource.postValue(tvShowRepository.getTvShows("day", "en-US"))
         }
     }
 
