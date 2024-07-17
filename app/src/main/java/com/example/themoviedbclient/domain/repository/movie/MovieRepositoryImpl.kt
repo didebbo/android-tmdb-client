@@ -14,7 +14,7 @@ class MovieRepositoryImpl(
         timeWindow: String,
         language: String
     ): Resource<Movies> {
-        return responseToResource(movieRemoteDataSource.getTrendingMovies(timeWindow,language))
+        return responseToResource(movieRemoteDataSource.getMovies(timeWindow,language))
     }
 
     override fun getPosterFulPath(imageFile: String): String {

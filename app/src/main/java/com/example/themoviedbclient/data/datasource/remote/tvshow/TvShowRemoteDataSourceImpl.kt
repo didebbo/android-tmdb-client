@@ -7,7 +7,7 @@ import retrofit2.Response
 class TvShowRemoteDataSourceImpl(
     private val tvShowApiService: TvShowApiService
 ): TvShowRemoteDataSource {
-    override suspend fun getTrendingTvShows(timeWindow: String, language: String): Response<TvShows> {
-        return tvShowApiService.getTrendingTvShows(timeWindow,language)
+    override suspend fun getTvShows(timeWindow: String, language: String): Response<TvShows> {
+        return tvShowApiService.getTvShows(timeWindow,language)
     }
 }

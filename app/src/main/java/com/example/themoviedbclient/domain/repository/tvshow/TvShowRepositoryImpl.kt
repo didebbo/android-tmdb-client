@@ -1,7 +1,6 @@
-package com.example.themoviedbclient.domain.repository.movie
+package com.example.themoviedbclient.domain.repository.tvshow
 
 import com.example.themoviedbclient.data.datasource.remote.image.ImagePathRemoteDataSource
-import com.example.themoviedbclient.data.datasource.remote.movie.MovieRemoteDataSource
 import com.example.themoviedbclient.data.datasource.remote.tvshow.TvShowRemoteDataSource
 import com.example.themoviedbclient.data.model.tvshow.TvShows
 import com.example.themoviedbclient.data.util.Resource
@@ -12,7 +11,7 @@ class TvShowRepositoryImpl(
     private val imagePathRemoteDataSource: ImagePathRemoteDataSource
 ): TvShowRepository {
     override suspend fun getTvShows(timeWindow: String, language: String): Resource<TvShows> {
-        return responseToResource(tvShowRemoteDataSource.getTrendingTvShows(timeWindow,language))
+        return responseToResource(tvShowRemoteDataSource.getTvShows(timeWindow,language))
     }
 
     override fun getPosterFulPath(imageFile: String): String {

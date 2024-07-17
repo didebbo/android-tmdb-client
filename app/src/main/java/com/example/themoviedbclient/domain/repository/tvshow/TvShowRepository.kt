@@ -1,6 +1,5 @@
-package com.example.themoviedbclient.domain.repository.movie
+package com.example.themoviedbclient.domain.repository.tvshow
 
-import com.example.themoviedbclient.data.model.movie.Movies
 import com.example.themoviedbclient.data.model.tvshow.TvShows
 import com.example.themoviedbclient.data.util.Resource
 

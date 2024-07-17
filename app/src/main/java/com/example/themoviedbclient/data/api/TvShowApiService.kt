@@ -9,5 +9,5 @@ import retrofit2.http.Query
 interface TvShowApiService {
 
     @GET("3/trending/tv/{time_window}")
-    suspend fun getTrendingTvShows(@Path("time_window") timeWindow: String, @Query("language") language: String): Response<TvShows>
+    suspend fun getTvShows(@Path("time_window") timeWindow: String, @Query("language") language: String): Response<TvShows>
 }

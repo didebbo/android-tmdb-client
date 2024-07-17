@@ -4,8 +4,8 @@ import com.example.themoviedbclient.data.api.TvShowApiService
 import com.example.themoviedbclient.data.datasource.remote.image.ImagePathRemoteDataSource
 import com.example.themoviedbclient.data.datasource.remote.tvshow.TvShowRemoteDataSource
 import com.example.themoviedbclient.data.datasource.remote.tvshow.TvShowRemoteDataSourceImpl
-import com.example.themoviedbclient.domain.repository.movie.TvShowRepository
-import com.example.themoviedbclient.domain.repository.movie.TvShowRepositoryImpl
+import com.example.themoviedbclient.domain.repository.tvshow.TvShowRepository
+import com.example.themoviedbclient.domain.repository.tvshow.TvShowRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
