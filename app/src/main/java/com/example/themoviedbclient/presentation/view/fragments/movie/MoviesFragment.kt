@@ -6,8 +6,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.themoviedbclient.data.model.movie.Movie
 import com.example.themoviedbclient.data.util.Resource
-import com.example.themoviedbclient.presentation.view.MainActivity
-import com.example.themoviedbclient.presentation.view.baseclass.fragment.BaseFragmentList
+import com.example.themoviedbclient.presentation.view.activity.MainActivity
+import com.example.themoviedbclient.presentation.baseclass.fragment.BaseFragmentList
+import com.example.themoviedbclient.presentation.view.fragments.movie.adapter.MovieRecyclerViewAdapter
+import com.example.themoviedbclient.presentation.view.fragments.movie.adapter.MovieViewHolderItem
 import com.example.themoviedbclient.presentation.viewmodel.MoviesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch

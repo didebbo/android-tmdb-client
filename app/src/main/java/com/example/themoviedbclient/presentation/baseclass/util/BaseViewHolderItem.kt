@@ -1,0 +1,3 @@
+package com.example.themoviedbclient.presentation.baseclass.util
+
+abstract class BaseViewHolderItem

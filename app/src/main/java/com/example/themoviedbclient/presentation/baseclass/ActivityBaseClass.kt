@@ -1,4 +1,4 @@
-package com.example.themoviedbclient.presentation.view.baseclass
+package com.example.themoviedbclient.presentation.baseclass
 
 import android.os.Bundle
 import android.view.View

@@ -1,4 +1,4 @@
-package com.example.themoviedbclient.presentation.view.baseclass.fragment
+package com.example.themoviedbclient.presentation.baseclass.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.themoviedbclient.databinding.BaseFragmentListBinding
-import com.example.themoviedbclient.presentation.view.baseclass.util.BaseRecyclerViewAdapter
-import com.example.themoviedbclient.presentation.view.baseclass.util.BaseViewHolder
-import com.example.themoviedbclient.presentation.view.baseclass.util.BaseViewHolderItem
+import com.example.themoviedbclient.presentation.baseclass.util.BaseRecyclerViewAdapter
+import com.example.themoviedbclient.presentation.baseclass.util.BaseViewHolder
+import com.example.themoviedbclient.presentation.baseclass.util.BaseViewHolderItem
 
 abstract class BaseFragmentList: Fragment() {
 
@@ -36,7 +36,7 @@ abstract class BaseFragmentList: Fragment() {
 
     open fun afterOnViewCreated(view: View, savedInstanceState: Bundle?) {}
 
-    fun <VH: BaseViewHolder<View, I>, I: BaseViewHolderItem> setAdapter(adapter: BaseRecyclerViewAdapter<VH,I>) {
+    fun <VH: BaseViewHolder<View, I>, I: BaseViewHolderItem> setAdapter(adapter: BaseRecyclerViewAdapter<VH, I>) {
         recyclerView.adapter = adapter
     }
 }
