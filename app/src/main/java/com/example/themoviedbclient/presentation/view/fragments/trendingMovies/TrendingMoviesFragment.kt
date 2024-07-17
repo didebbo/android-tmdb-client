@@ -2,10 +2,9 @@ package com.example.themoviedbclient.presentation.view.fragments.trendingMovies
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.example.themoviedbclient.data.model.Movie
+import com.example.themoviedbclient.data.model.movie.Movie
 import com.example.themoviedbclient.data.util.Resource
 import com.example.themoviedbclient.presentation.view.MainActivity
 import com.example.themoviedbclient.presentation.view.baseclass.fragment.BaseFragmentList
@@ -28,7 +27,7 @@ class TrendingMoviesFragment: BaseFragmentList() {
             viewModel.fetchTrendingMoviesResource()
         }
 
-        viewModel.trendingMoviesResource.observe(this) {
+        viewModel.moviesResource.observe(this) {
             when(it) {
                 is Resource.Loading -> {
                     parent?.showLoader()
