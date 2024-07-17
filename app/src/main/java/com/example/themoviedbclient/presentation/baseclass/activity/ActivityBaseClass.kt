@@ -33,10 +33,14 @@ abstract class ActivityBaseClass: AppCompatActivity() {
         bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId) {
                 R.id.movies -> {
+                    navController.popBackStack(R.id.movieDetail,false)
+                    navController.popBackStack(R.id.tvShowDetail,false)
                     navController.navigate(R.id.movies)
                     true
                 }
                 R.id.tvShows -> {
+                    navController.popBackStack(R.id.movieDetail,false)
+                    navController.popBackStack(R.id.tvShowDetail,false)
                     navController.navigate(R.id.tvShows)
                     true
                 }

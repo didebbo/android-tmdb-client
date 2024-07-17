@@ -4,18 +4,34 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.ActionBar
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.themoviedbclient.databinding.BaseFragmentListBinding
 import com.example.themoviedbclient.presentation.baseclass.adapter.BaseRecyclerViewAdapter
 import com.example.themoviedbclient.presentation.baseclass.adapter.BaseViewHolder
 import com.example.themoviedbclient.presentation.baseclass.adapter.BaseViewHolderItem
+import com.example.themoviedbclient.presentation.view.activity.MainActivity
 
 abstract class BaseFragmentList: Fragment() {
 
     lateinit var binding: BaseFragmentListBinding
     private lateinit var recyclerView: RecyclerView
+
+    val parent: MainActivity? by lazy {
+        activity as? MainActivity
+    }
+
+    val navController: NavController? by lazy {
+        findNavController()
+    }
+
+    val actionBar: ActionBar? by lazy {
+        parent?.supportActionBar
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,6 +46,7 @@ abstract class BaseFragmentList: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(context)
+        actionBar?.setDisplayHomeAsUpEnabled(false)
         afterOnViewCreated(view, savedInstanceState)
     }
 

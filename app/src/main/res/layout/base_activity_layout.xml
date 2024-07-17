@@ -9,6 +9,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        app:itemPaddingTop="10dp"
+        app:itemPaddingBottom="10dp"
+        app:itemTextAppearanceActive="@style/BottomNavigation_ItemTextAppearanceActive"
+        app:itemTextAppearanceInactive="@style/BottomNavigation_ItemTextAppearanceInactive"
         app:menu="@menu/bottom_menu"
         />
 

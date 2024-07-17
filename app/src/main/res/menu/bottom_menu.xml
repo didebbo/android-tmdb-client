@@ -3,9 +3,11 @@
     <item
         android:id="@+id/movies"
         android:title="Movies"
+        android:icon="@drawable/ic_theaters_24px"
         />
     <item
         android:id="@+id/tvShows"
         android:title="Tv Shows"
+        android:icon="@drawable/ic_tv_gen_24px"
         />
 </menu>

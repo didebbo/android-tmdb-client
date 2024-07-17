@@ -26,14 +26,6 @@ class TvShowsFragment: BaseFragmentList() {
     private val viewModel: TvShowsViewModel by activityViewModels()
     private val detailItemViewModel: DetailItemViewModel by activityViewModels()
 
-    private val parent: MainActivity? by lazy {
-        activity as? MainActivity
-    }
-
-    private val navController: NavController? by lazy {
-        findNavController()
-    }
-
     override fun afterOnViewCreated(view: View, savedInstanceState: Bundle?) {
         super.afterOnViewCreated(view, savedInstanceState)
 
