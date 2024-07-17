@@ -11,11 +11,13 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.themoviedbclient.R
 import com.example.themoviedbclient.databinding.BaseActivityLayoutBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 abstract class ActivityBaseClass: AppCompatActivity() {
 
     private lateinit var binding: BaseActivityLayoutBinding
     private lateinit var navController: NavController
+    private lateinit var bottomNavigationView: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,11 +25,24 @@ abstract class ActivityBaseClass: AppCompatActivity() {
         setContentView(binding.root)
 
         navController = findNavController(R.id.nav_host_fragment)
-        val navView = binding.navView
+        bottomNavigationView = binding.bottomNavigationView
+        bottomNavigationView.setupWithNavController(navController)
         val appBarConfiguration = AppBarConfiguration(navController.graph)
-
         setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+
+        bottomNavigationView.setOnItemSelectedListener {
+            when(it.itemId) {
+                R.id.movies -> {
+                    navController.navigate(R.id.movies)
+                    true
+                }
+                R.id.tvShows -> {
+                    navController.navigate(R.id.tvShows)
+                    true
+                }
+                else -> true
+            }
+        }
 
         hideModalSystem()
 
