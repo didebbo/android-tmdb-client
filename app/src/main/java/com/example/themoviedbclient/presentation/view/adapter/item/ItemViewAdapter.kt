@@ -1,4 +1,4 @@
-package com.example.themoviedbclient.presentation.view.adapter.small
+package com.example.themoviedbclient.presentation.view.adapter.item
 
 import android.view.View
 import com.example.themoviedbclient.R

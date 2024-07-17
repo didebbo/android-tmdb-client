@@ -12,4 +12,11 @@
         tools:layout="@layout/base_fragment_list"
         >
     </fragment>
+    <fragment
+        android:id="@+id/tvShows"
+        android:label="Tv Shows"
+        android:name="com.example.themoviedbclient.presentation.view.fragments.tvshow.TvShowsFragment"
+        tools:layout="@layout/base_fragment_list"
+        >
+    </fragment>
 </navigation>

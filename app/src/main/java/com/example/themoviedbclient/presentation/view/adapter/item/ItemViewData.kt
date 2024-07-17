@@ -1,4 +1,4 @@
-package com.example.themoviedbclient.presentation.view.adapter.small
+package com.example.themoviedbclient.presentation.view.adapter.item
 
 import com.example.themoviedbclient.presentation.baseclass.adapter.BaseViewHolderItem
 

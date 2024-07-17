@@ -4,4 +4,8 @@
         android:id="@+id/movies"
         android:title="Movies"
         />
+    <item
+        android:id="@+id/tvShows"
+        android:title="Tv Shows"
+        />
 </menu>

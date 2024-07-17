@@ -8,8 +8,8 @@ import com.example.themoviedbclient.data.model.tvshow.TvShow
 import com.example.themoviedbclient.data.util.Resource
 import com.example.themoviedbclient.presentation.view.activity.MainActivity
 import com.example.themoviedbclient.presentation.baseclass.fragment.BaseFragmentList
-import com.example.themoviedbclient.presentation.view.adapter.small.ItemViewAdapter
-import com.example.themoviedbclient.presentation.view.adapter.small.ItemViewData
+import com.example.themoviedbclient.presentation.view.adapter.item.ItemViewAdapter
+import com.example.themoviedbclient.presentation.view.adapter.item.ItemViewData
 import com.example.themoviedbclient.presentation.viewmodel.tvshow.TvShowsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
