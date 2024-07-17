@@ -32,7 +32,7 @@
         android:clickable="true"
         android:background="@color/opacity">
         <ProgressBar
-            android:visibility="visible"
+            android:visibility="gone"
             android:id="@+id/progress_bar"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
