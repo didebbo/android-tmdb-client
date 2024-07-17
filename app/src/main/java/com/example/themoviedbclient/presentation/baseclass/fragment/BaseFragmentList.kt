@@ -7,11 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.themoviedbclient.databinding.BaseFragmentListBinding
-import com.example.themoviedbclient.presentation.baseclass.util.BaseRecyclerViewAdapter
-import com.example.themoviedbclient.presentation.baseclass.util.BaseViewHolder
-import com.example.themoviedbclient.presentation.baseclass.util.BaseViewHolderItem
+import com.example.themoviedbclient.presentation.baseclass.adapter.BaseRecyclerViewAdapter
+import com.example.themoviedbclient.presentation.baseclass.adapter.BaseViewHolder
+import com.example.themoviedbclient.presentation.baseclass.adapter.BaseViewHolderItem
 
 abstract class BaseFragmentList: Fragment() {
 

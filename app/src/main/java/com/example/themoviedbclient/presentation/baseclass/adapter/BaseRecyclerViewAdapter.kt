@@ -1,11 +1,9 @@
-package com.example.themoviedbclient.presentation.baseclass.util
+package com.example.themoviedbclient.presentation.baseclass.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.themoviedbclient.R
 
 abstract class BaseRecyclerViewAdapter<VH: BaseViewHolder<View, I>, I: BaseViewHolderItem>(private val data: List<I>): RecyclerView.Adapter<VH>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {

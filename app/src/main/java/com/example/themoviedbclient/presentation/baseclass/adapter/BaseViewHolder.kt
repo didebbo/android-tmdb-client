@@ -1,4 +1,4 @@
-package com.example.themoviedbclient.presentation.baseclass.util
+package com.example.themoviedbclient.presentation.baseclass.adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

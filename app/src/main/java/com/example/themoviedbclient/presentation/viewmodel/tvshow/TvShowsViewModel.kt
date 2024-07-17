@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.themoviedbclient.data.model.movie.Movie
+import com.example.themoviedbclient.data.model.tvshow.TvShow
 import com.example.themoviedbclient.data.model.tvshow.TvShows
 import com.example.themoviedbclient.data.util.Resource
 import com.example.themoviedbclient.domain.repository.tvshow.TvShowRepository
@@ -23,14 +24,14 @@ class TvShowsViewModel @Inject constructor(
 
     val tvShowsResource: LiveData<Resource<TvShows>> get() = _tvShowsResource
 
-    suspend fun fetchMoviesResource(){
+    suspend fun getTvShowsResource(){
         _tvShowsResource.value = Resource.Loading()
         viewModelScope.launch(Dispatchers.IO) {
             _tvShowsResource.postValue(tvShowRepository.getTvShows("day", "en-US"))
         }
     }
 
-    fun getPosterFullPathFrom(movie: Movie): String {
-        return tvShowRepository.getPosterFulPath(movie.posterPath)
+    fun getPosterFullPathFrom(tvShow: TvShow): String {
+        return tvShowRepository.getPosterFulPath(tvShow.posterPath)
     }
 }

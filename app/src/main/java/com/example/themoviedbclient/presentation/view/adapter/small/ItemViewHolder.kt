@@ -1,16 +1,16 @@
-package com.example.themoviedbclient.presentation.view.fragments.movie.adapter
+package com.example.themoviedbclient.presentation.view.adapter.small
 
 import android.view.View
 import com.bumptech.glide.Glide
 import com.example.themoviedbclient.databinding.SmallItemRecyclerViewBinding
-import com.example.themoviedbclient.presentation.baseclass.util.BaseViewHolder
+import com.example.themoviedbclient.presentation.baseclass.adapter.BaseViewHolder
 
-sealed class MovieViewHolder(itemView: View): BaseViewHolder<View, MovieViewHolderItem>(itemView)  {
-    class SmallItemMovieViewHolder(itemView: View): MovieViewHolder(itemView) {
+sealed class ItemViewHolder(itemView: View): BaseViewHolder<View, ItemViewData>(itemView)  {
+    class SmallItemViewHolder(itemView: View): ItemViewHolder(itemView) {
 
         private val binding: SmallItemRecyclerViewBinding =
             SmallItemRecyclerViewBinding.bind(itemView)
-        override fun bind(item: MovieViewHolderItem) {
+        override fun bind(item: ItemViewData) {
             binding.titleTextView.text = item.title
             binding.overviewTextView.text = item.overview
             Glide.with(binding.root).load(item.fullPosterPath).into(binding.posterImage)
