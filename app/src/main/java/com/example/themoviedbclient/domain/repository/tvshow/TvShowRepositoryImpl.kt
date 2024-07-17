@@ -42,8 +42,10 @@ class TvShowRepositoryImpl(
         if(response.isSuccessful) {
             val savedTvShows = getSavedTvShows()
             val result = response.body()?.result.orEmpty().map { dto ->
-                val itemModel = ItemModel( dto.id, dto.title, dto.overview, dto.posterPath, dto.coverPath,false).also {
-                    it.saved = savedTvShows.contains(it)
+                val itemModel = ItemModel( dto.id, dto.title, dto.overview, dto.posterPath, dto.coverPath,false).also { itemModel ->
+                    itemModel.saved = savedTvShows.any { savedItemModel ->
+                        savedItemModel.id == itemModel.id
+                    }
                 }
                 itemModel
             }

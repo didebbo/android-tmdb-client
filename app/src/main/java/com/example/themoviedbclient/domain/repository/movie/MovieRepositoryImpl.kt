@@ -1,5 +1,6 @@
 package com.example.themoviedbclient.domain.repository.movie
 
+import android.util.Log
 import com.example.themoviedbclient.data.datasource.local.dao.MovieDao
 import com.example.themoviedbclient.data.datasource.local.entity.EntityMovie
 import com.example.themoviedbclient.data.datasource.remote.image.ImagePathRemoteDataSource
@@ -42,8 +43,10 @@ class MovieRepositoryImpl(
         if(response.isSuccessful) {
             val savedMovies = getSavedMovies()
             val result = response.body()?.result.orEmpty().map { dto ->
-                val itemModel = ItemModel( dto.id, dto.title, dto.overview, dto.posterPath, dto.coverPath,false).also {
-                    it.saved = savedMovies.contains(it)
+                val itemModel = ItemModel( dto.id, dto.title, dto.overview, dto.posterPath, dto.coverPath,false).also { itemModel ->
+                    itemModel.saved = savedMovies.any { savedItemModel ->
+                        savedItemModel.id == itemModel.id
+                    }
                 }
                 itemModel
             }

@@ -50,6 +50,9 @@ class TvShowsFragment: BaseFragmentList() {
                             onDetail = {
                                 detailItemViewModel.setItem(item)
                                 navController?.navigate(R.id.action_tvShows_to_tvShowDetail)
+                            },
+                            onSave = {
+
                             }
                         )
                     }

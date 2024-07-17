@@ -1,5 +1,6 @@
 package com.example.themoviedbclient.presentation.viewmodel.movie
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -31,5 +32,18 @@ class MoviesViewModel @Inject constructor(
 
     fun getImageFullPath(path: String): String {
         return movieRepository.getImageFullPath(path)
+    }
+
+    suspend fun saveMovie(item: ItemModel) {
+        viewModelScope.launch(Dispatchers.IO) {
+            movieRepository.saveMovie(item)
+            val data = _moviesResource.value?.data?.map {
+                if(item.id == it.id) {
+                    it.saved = true
+                }
+                it
+            }
+            _moviesResource.postValue(Resource.Success(data))
+        }
     }
 }

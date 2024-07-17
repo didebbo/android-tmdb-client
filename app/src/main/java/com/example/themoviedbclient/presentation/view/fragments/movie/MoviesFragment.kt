@@ -51,6 +51,11 @@ class MoviesFragment: BaseFragmentList() {
                             onDetail = {
                                 detailItemViewModel.setItem(item)
                                 navController?.navigate(R.id.action_movies_to_movieDetail)
+                            },
+                            onSave = {
+                                lifecycleScope.launch {
+                                    viewModel.saveMovie(item)
+                                }
                             }
                         )
                     }
