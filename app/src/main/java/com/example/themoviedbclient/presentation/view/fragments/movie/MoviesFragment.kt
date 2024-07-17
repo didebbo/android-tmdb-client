@@ -1,4 +1,4 @@
-package com.example.themoviedbclient.presentation.view.fragments.trendingMovies
+package com.example.themoviedbclient.presentation.view.fragments.movie
 
 import android.os.Bundle
 import android.view.View
@@ -8,14 +8,14 @@ import com.example.themoviedbclient.data.model.movie.Movie
 import com.example.themoviedbclient.data.util.Resource
 import com.example.themoviedbclient.presentation.view.MainActivity
 import com.example.themoviedbclient.presentation.view.baseclass.fragment.BaseFragmentList
-import com.example.themoviedbclient.presentation.viewmodel.TrendingMoviesViewModel
+import com.example.themoviedbclient.presentation.viewmodel.MoviesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class TrendingMoviesFragment: BaseFragmentList() {
+class MoviesFragment: BaseFragmentList() {
 
-    private val viewModel: TrendingMoviesViewModel by viewModels()
+    private val viewModel: MoviesViewModel by viewModels()
     private val parent: MainActivity? by lazy {
         activity as? MainActivity
     }
@@ -24,7 +24,7 @@ class TrendingMoviesFragment: BaseFragmentList() {
         super.afterOnViewCreated(view, savedInstanceState)
 
         lifecycleScope.launch {
-            viewModel.fetchTrendingMoviesResource()
+            viewModel.fetchMoviesResource()
         }
 
         viewModel.moviesResource.observe(this) {
@@ -39,14 +39,14 @@ class TrendingMoviesFragment: BaseFragmentList() {
                 is Resource.Success -> {
                     parent?.hideLoader()
                     val data: List<Movie> = it.data?.result.orEmpty()
-                    val items: List<ViewHolderTrendingMoviesItem> = data.map { item ->
-                        ViewHolderTrendingMoviesItem(
+                    val items: List<MovieViewHolderItem> = data.map { item ->
+                        MovieViewHolderItem(
                             viewModel.getPosterFullPathFrom(item),
                             item.title,
                             item.overview
                         )
                     }
-                    val adapter = TrendingMoviesAdapter(items)
+                    val adapter = MovieRecyclerViewAdapter(items)
                     setAdapter(adapter)
                 }
                 else -> Unit

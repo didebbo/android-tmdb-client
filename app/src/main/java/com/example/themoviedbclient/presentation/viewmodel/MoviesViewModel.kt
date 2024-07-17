@@ -14,13 +14,13 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class TrendingMoviesViewModel @Inject constructor(
+class MoviesViewModel @Inject constructor(
     private val movieRepository: MovieRepository
 ): ViewModel() {
 
     private var _MoviesResource: MutableLiveData<Resource<Movies>> = MutableLiveData(Resource.Null())
     val moviesResource: LiveData<Resource<Movies>> get() = _MoviesResource
-    suspend fun fetchTrendingMoviesResource(){
+    suspend fun fetchMoviesResource(){
         _MoviesResource.value = Resource.Loading()
         viewModelScope.launch(Dispatchers.IO) {
             _MoviesResource.postValue(movieRepository.getMovies("day", "en-US"))

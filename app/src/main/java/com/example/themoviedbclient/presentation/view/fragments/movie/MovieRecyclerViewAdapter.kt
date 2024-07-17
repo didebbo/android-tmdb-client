@@ -1,4 +1,4 @@
-package com.example.themoviedbclient.presentation.view.fragments.trendingMovies
+package com.example.themoviedbclient.presentation.view.fragments.movie
 
 import android.view.View
 import com.bumptech.glide.Glide
@@ -8,17 +8,17 @@ import com.example.themoviedbclient.presentation.view.baseclass.util.BaseRecycle
 import com.example.themoviedbclient.presentation.view.baseclass.util.BaseViewHolder
 import com.example.themoviedbclient.presentation.view.baseclass.util.BaseViewHolderItem
 
-class ViewHolderTrendingMoviesItem(
+class MovieViewHolderItem(
     val fullPosterPath: String,
     val title: String,
     val overview: String
 ): BaseViewHolderItem()
 
-sealed class TrendingMovieViewHolder(itemView: View): BaseViewHolder<View,ViewHolderTrendingMoviesItem>(itemView)  {
-    class SmallItemTrendingMovieViewHolder(itemView: View): TrendingMovieViewHolder(itemView) {
+sealed class MovieViewHolder(itemView: View): BaseViewHolder<View,MovieViewHolderItem>(itemView)  {
+    class SmallItemMovieViewHolder(itemView: View): MovieViewHolder(itemView) {
 
         private val binding: SmallItemRecyclerViewBinding = SmallItemRecyclerViewBinding.bind(itemView)
-        override fun bind(item: ViewHolderTrendingMoviesItem) {
+        override fun bind(item: MovieViewHolderItem) {
             binding.titleTextView.text = item.title
             binding.overviewTextView.text = item.overview
             Glide.with(binding.root).load(item.fullPosterPath).into(binding.posterImage)
@@ -26,10 +26,10 @@ sealed class TrendingMovieViewHolder(itemView: View): BaseViewHolder<View,ViewHo
     }
 }
 
-class TrendingMoviesAdapter(data: List<ViewHolderTrendingMoviesItem>): BaseRecyclerViewAdapter<TrendingMovieViewHolder,ViewHolderTrendingMoviesItem>(data){
+class MovieRecyclerViewAdapter(data: List<MovieViewHolderItem>): BaseRecyclerViewAdapter<MovieViewHolder,MovieViewHolderItem>(data){
 
-    override fun createViewHolder(view: View): TrendingMovieViewHolder {
-        return TrendingMovieViewHolder.SmallItemTrendingMovieViewHolder(view)
+    override fun createViewHolder(view: View): MovieViewHolder {
+        return MovieViewHolder.SmallItemMovieViewHolder(view)
     }
 
     override fun getLayoutFrom(position: Int): Int {
