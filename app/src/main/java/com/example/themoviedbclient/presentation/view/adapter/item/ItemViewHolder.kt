@@ -14,6 +14,9 @@ sealed class ItemViewHolder(itemView: View): BaseViewHolder<View, ItemViewData>(
             binding.titleTextView.text = item.title
             binding.overviewTextView.text = item.overview
             Glide.with(binding.root).load(item.posterURL).into(binding.posterImage)
+            binding.detailButton.setOnClickListener {
+                item.onDetail()
+            }
         }
     }
 }

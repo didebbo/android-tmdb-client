@@ -6,5 +6,6 @@ class ItemViewData(
     val title: String,
     val overview: String,
     val posterURL: String,
-    val coverURL: String
+    val coverURL: String,
+    val onDetail: () -> Unit
 ): BaseViewHolderItem()

@@ -29,11 +29,4 @@ class MoviesViewModel @Inject constructor(
             _moviesResource.postValue(movieRepository.getMovies("day", "en-US"))
         }
     }
-
-    fun getPosterFullPathFrom(movieDTO: MovieDTO): String {
-        return movieRepository.getPosterFulPath(movieDTO.posterPath)
-    }
-
-
-
 }
