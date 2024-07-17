@@ -1,4 +1,4 @@
-package com.example.themoviedbclient.presentation.viewmodel
+package com.example.themoviedbclient.presentation.viewmodel.movie
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -18,12 +18,15 @@ class MoviesViewModel @Inject constructor(
     private val movieRepository: MovieRepository
 ): ViewModel() {
 
-    private var _MoviesResource: MutableLiveData<Resource<Movies>> = MutableLiveData(Resource.Null())
-    val moviesResource: LiveData<Resource<Movies>> get() = _MoviesResource
-    suspend fun fetchMoviesResource(){
-        _MoviesResource.value = Resource.Loading()
+    private var _moviesResource: MutableLiveData<Resource<Movies>> =
+        MutableLiveData(Resource.Null())
+
+    val moviesResource: LiveData<Resource<Movies>> get() = _moviesResource
+
+    suspend fun getMoviesResource(){
+        _moviesResource.value = Resource.Loading()
         viewModelScope.launch(Dispatchers.IO) {
-            _MoviesResource.postValue(movieRepository.getMovies("day", "en-US"))
+            _moviesResource.postValue(movieRepository.getMovies("day", "en-US"))
         }
     }
 

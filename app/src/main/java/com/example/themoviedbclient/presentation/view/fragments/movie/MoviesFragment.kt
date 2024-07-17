@@ -10,7 +10,7 @@ import com.example.themoviedbclient.presentation.view.activity.MainActivity
 import com.example.themoviedbclient.presentation.baseclass.fragment.BaseFragmentList
 import com.example.themoviedbclient.presentation.view.fragments.movie.adapter.MovieRecyclerViewAdapter
 import com.example.themoviedbclient.presentation.view.fragments.movie.adapter.MovieViewHolderItem
-import com.example.themoviedbclient.presentation.viewmodel.MoviesViewModel
+import com.example.themoviedbclient.presentation.viewmodel.movie.MoviesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -26,7 +26,7 @@ class MoviesFragment: BaseFragmentList() {
         super.afterOnViewCreated(view, savedInstanceState)
 
         lifecycleScope.launch {
-            viewModel.fetchMoviesResource()
+            viewModel.getMoviesResource()
         }
 
         viewModel.moviesResource.observe(this) {
