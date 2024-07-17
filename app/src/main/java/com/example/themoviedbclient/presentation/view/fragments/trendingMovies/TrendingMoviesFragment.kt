@@ -3,18 +3,20 @@ package com.example.themoviedbclient.presentation.view.fragments.trendingMovies
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.themoviedbclient.data.model.Movie
 import com.example.themoviedbclient.data.util.Resource
 import com.example.themoviedbclient.presentation.view.MainActivity
 import com.example.themoviedbclient.presentation.view.baseclass.fragment.BaseFragmentList
-import com.example.themoviedbclient.presentation.view.fragments.trendingMovies.TrendingMoviesAdapter.*
-import com.example.themoviedbclient.presentation.viewmodel.MainActivityViewModel
+import com.example.themoviedbclient.presentation.viewmodel.TrendingMoviesViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class TrendingMoviesFragment: BaseFragmentList() {
 
-    private val viewModel: MainActivityViewModel by activityViewModels()
+    private val viewModel: TrendingMoviesViewModel by viewModels()
     private val parent: MainActivity? by lazy {
         activity as? MainActivity
     }
@@ -38,8 +40,8 @@ class TrendingMoviesFragment: BaseFragmentList() {
                 is Resource.Success -> {
                     parent?.hideLoader()
                     val data: List<Movie> = it.data?.result.orEmpty()
-                    val items: List<TrendingMoviesItem> = data.map { item ->
-                        TrendingMoviesItem(
+                    val items: List<ViewHolderTrendingMoviesItem> = data.map { item ->
+                        ViewHolderTrendingMoviesItem(
                             viewModel.getPosterFullPathFrom(item),
                             item.title,
                             item.overview

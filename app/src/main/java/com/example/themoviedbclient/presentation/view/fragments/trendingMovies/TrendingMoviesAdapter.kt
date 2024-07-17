@@ -8,17 +8,17 @@ import com.example.themoviedbclient.presentation.view.baseclass.util.BaseRecycle
 import com.example.themoviedbclient.presentation.view.baseclass.util.BaseViewHolder
 import com.example.themoviedbclient.presentation.view.baseclass.util.BaseViewHolderItem
 
-class TrendingMoviesItem(
+class ViewHolderTrendingMoviesItem(
     val fullPosterPath: String,
     val title: String,
     val overview: String
 ): BaseViewHolderItem()
 
-sealed class TrendingMovieViewHolder(itemView: View): BaseViewHolder<View,TrendingMoviesItem>(itemView)  {
+sealed class TrendingMovieViewHolder(itemView: View): BaseViewHolder<View,ViewHolderTrendingMoviesItem>(itemView)  {
     class SmallItemTrendingMovieViewHolder(itemView: View): TrendingMovieViewHolder(itemView) {
 
         private val binding: SmallItemRecyclerViewBinding = SmallItemRecyclerViewBinding.bind(itemView)
-        override fun bind(item: TrendingMoviesItem) {
+        override fun bind(item: ViewHolderTrendingMoviesItem) {
             binding.titleTextView.text = item.title
             binding.overviewTextView.text = item.overview
             Glide.with(binding.root).load(item.fullPosterPath).into(binding.posterImage)
@@ -26,7 +26,7 @@ sealed class TrendingMovieViewHolder(itemView: View): BaseViewHolder<View,Trendi
     }
 }
 
-class TrendingMoviesAdapter(data: List<TrendingMoviesItem>): BaseRecyclerViewAdapter<TrendingMovieViewHolder,TrendingMoviesItem>(data){
+class TrendingMoviesAdapter(data: List<ViewHolderTrendingMoviesItem>): BaseRecyclerViewAdapter<TrendingMovieViewHolder,ViewHolderTrendingMoviesItem>(data){
 
     override fun createViewHolder(view: View): TrendingMovieViewHolder {
         return TrendingMovieViewHolder.SmallItemTrendingMovieViewHolder(view)

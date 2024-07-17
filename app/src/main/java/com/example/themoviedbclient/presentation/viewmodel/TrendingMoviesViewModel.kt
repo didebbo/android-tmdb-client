@@ -10,12 +10,11 @@ import com.example.themoviedbclient.data.util.Resource
 import com.example.themoviedbclient.domain.repository.movie.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainActivityViewModel @Inject constructor(
+class TrendingMoviesViewModel @Inject constructor(
     private val movieRepository: MovieRepository
 ): ViewModel() {
 
