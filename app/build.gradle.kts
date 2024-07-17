@@ -80,11 +80,11 @@ dependencies {
     kapt(libs.hilt.compiler)
 
     // CoroutineScope
-    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.8.3")
-    implementation ("androidx.fragment:fragment-ktx:1.8.1")
+    implementation (libs.androidx.lifecycle.runtime.ktx)
+    implementation (libs.androidx.fragment.ktx)
 
     // Glide
-    implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation(libs.glide)
 
 
     testImplementation(libs.junit)
