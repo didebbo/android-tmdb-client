@@ -15,12 +15,12 @@ class TvShowRepositoryImpl(
     private val tvShowDao: TvShowDao
 ): TvShowRepository {
     override suspend fun getTvShows(timeWindow: String, language: String): Resource<List<ItemModel>> {
-        return responseToResource(tvShowRemoteDataSource.getTvShows(timeWindow,language))
+        return responseToResource(tvShowRemoteDataSource.getTvShows())
     }
 
     override suspend fun getSavedTvShows(): List<ItemModel> {
         return tvShowDao.getTvShows().map {
-            ItemModel(it.id,it.title,it.overview,it.posterPath,it.coverPath)
+            ItemModel(it.id,it.title,it.overview,it.posterPath,it.coverPath,true)
         }
     }
 
@@ -38,10 +38,14 @@ class TvShowRepositoryImpl(
         return imagePathRemoteDataSource.getImageFullPath(path)
     }
 
-    private fun responseToResource(response: Response<TvShowsDTO>): Resource<List<ItemModel>> {
+    private suspend fun responseToResource(response: Response<TvShowsDTO>): Resource<List<ItemModel>> {
         if(response.isSuccessful) {
-            val result = response.body()?.result.orEmpty().map {
-                ItemModel( it.id, it.title, it.overview, it.posterPath, it.coverPath)
+            val savedTvShows = getSavedTvShows()
+            val result = response.body()?.result.orEmpty().map { dto ->
+                val itemModel = ItemModel( dto.id, dto.title, dto.overview, dto.posterPath, dto.coverPath,false).also {
+                    it.saved = savedTvShows.contains(it)
+                }
+                itemModel
             }
             return Resource.Success(result)
         }

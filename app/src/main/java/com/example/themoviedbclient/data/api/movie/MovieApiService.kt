@@ -8,5 +8,8 @@ import retrofit2.http.Query
 
 interface MovieApiService {
     @GET("3/trending/movie/{time_window}")
-    suspend fun getMovies(@Path("time_window") timeWindow: String, @Query("language") language: String): Response<MoviesDTO>
+    suspend fun getMovies(
+        @Path("time_window") timeWindow: String = "day",
+        @Query("language") language: String = "en-US"
+    ): Response<MoviesDTO>
 }

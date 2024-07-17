@@ -7,5 +7,6 @@ class ItemViewData(
     val overview: String,
     val posterPath: String,
     val coverPath: String,
+    val saved: Boolean,
     val onDetail: () -> Unit
 ): BaseViewHolderItem()

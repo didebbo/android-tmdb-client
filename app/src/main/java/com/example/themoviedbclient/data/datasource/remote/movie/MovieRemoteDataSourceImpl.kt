@@ -7,10 +7,7 @@ import retrofit2.Response
 class MovieRemoteDataSourceImpl(
     private val movieApiService: MovieApiService,
 ): MovieRemoteDataSource {
-    override suspend fun getMovies(
-        timeWindow: String,
-        language: String
-    ): Response<MoviesDTO> {
-        return movieApiService.getMovies(timeWindow,language)
+    override suspend fun getMovies(): Response<MoviesDTO> {
+        return movieApiService.getMovies()
     }
 }

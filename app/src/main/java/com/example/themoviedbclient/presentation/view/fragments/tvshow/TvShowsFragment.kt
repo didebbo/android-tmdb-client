@@ -46,6 +46,7 @@ class TvShowsFragment: BaseFragmentList() {
                             item.overview,
                             viewModel.getImageFullPath(item.posterPath),
                             viewModel.getImageFullPath(item.coverPath),
+                            item.saved,
                             onDetail = {
                                 detailItemViewModel.setItem(item)
                                 navController?.navigate(R.id.action_tvShows_to_tvShowDetail)

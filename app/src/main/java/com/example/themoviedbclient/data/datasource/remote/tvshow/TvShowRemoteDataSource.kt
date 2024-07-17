@@ -4,5 +4,5 @@ import com.example.themoviedbclient.data.dto.tvshow.TvShowsDTO
 import retrofit2.Response
 
 interface TvShowRemoteDataSource {
-    suspend fun getTvShows(timeWindow: String, language: String): Response<TvShowsDTO>
+    suspend fun getTvShows(): Response<TvShowsDTO>
 }

@@ -25,7 +25,7 @@ class MoviesViewModel @Inject constructor(
     suspend fun getMoviesResource(){
         _moviesResource.value = Resource.Loading()
         viewModelScope.launch(Dispatchers.IO) {
-            _moviesResource.postValue(movieRepository.getMovies("day", "en-US"))
+            _moviesResource.postValue(movieRepository.getMovies())
         }
     }
 

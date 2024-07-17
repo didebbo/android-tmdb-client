@@ -17,6 +17,10 @@ sealed class ItemViewHolder(itemView: View): BaseViewHolder<View, ItemViewData>(
             binding.detailButton.setOnClickListener {
                 item.onDetail()
             }
+
+            if(item.saved) {
+                binding.saveButton.visibility = View.GONE
+            }
         }
     }
 }

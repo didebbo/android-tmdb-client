@@ -14,16 +14,13 @@ class MovieRepositoryImpl(
     private val imagePathRemoteDataSource: ImagePathRemoteDataSource,
     private val movieDao: MovieDao
 ): MovieRepository {
-    override suspend fun getMovies(
-        timeWindow: String,
-        language: String
-    ): Resource<List<ItemModel>> {
-        return  responseToResource(movieRemoteDataSource.getMovies(timeWindow,language))
+    override suspend fun getMovies(): Resource<List<ItemModel>> {
+        return  responseToResource(movieRemoteDataSource.getMovies())
     }
 
     override suspend fun getSavedMovies(): List<ItemModel> {
         return movieDao.getMovies().map {
-            ItemModel(it.id,it.title,it.overview,it.posterPath,it.coverPath)
+            ItemModel(it.id,it.title,it.overview,it.posterPath,it.coverPath,true)
         }
     }
 
@@ -41,10 +38,14 @@ class MovieRepositoryImpl(
         return imagePathRemoteDataSource.getImageFullPath(path)
     }
 
-    private fun responseToResource(response: Response<MoviesDTO>): Resource<List<ItemModel>> {
+    private suspend fun responseToResource(response: Response<MoviesDTO>): Resource<List<ItemModel>> {
         if(response.isSuccessful) {
-            val result = response.body()?.result.orEmpty().map {
-                ItemModel( it.id, it.title, it.overview, it.posterPath, it.coverPath)
+            val savedMovies = getSavedMovies()
+            val result = response.body()?.result.orEmpty().map { dto ->
+                val itemModel = ItemModel( dto.id, dto.title, dto.overview, dto.posterPath, dto.coverPath,false).also {
+                    it.saved = savedMovies.contains(it)
+                }
+                itemModel
             }
             return Resource.Success(result)
         }

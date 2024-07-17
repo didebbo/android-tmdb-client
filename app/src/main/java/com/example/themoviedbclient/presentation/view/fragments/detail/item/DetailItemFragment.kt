@@ -37,6 +37,9 @@ class DetailItemFragment: Fragment() {
             Glide.with(binding.root).load(viewModel.getImageFullPath(item.coverPath)).into(binding.coverImage)
             binding.titleTextView.text = item.title
             binding.overviewTextView.text = item.overview
+            if(item.saved) {
+                binding.saveButton.visibility = View.GONE
+            }
         }
     }
 }

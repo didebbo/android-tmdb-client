@@ -4,5 +4,5 @@ import com.example.themoviedbclient.data.dto.movie.MoviesDTO
 import retrofit2.Response
 
 interface MovieRemoteDataSource {
-    suspend fun getMovies(timeWindow: String, language: String): Response<MoviesDTO>
+    suspend fun getMovies(): Response<MoviesDTO>
 }
