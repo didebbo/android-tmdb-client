@@ -11,10 +11,10 @@ val TMDB_TOKEN = tmdbProperties.getProperty("TMDB_TOKEN")
 
 
 plugins {
-    id("kotlin-kapt")
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.hilt)
+    id("kotlin-kapt")
 }
 
 android {
@@ -90,7 +90,6 @@ dependencies {
 
     // Glide
     implementation(libs.glide)
-
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
