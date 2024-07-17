@@ -7,7 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="140dp"
+    android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="10dp"
     >
@@ -24,7 +24,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center"
+        android:showDividers="middle"
+        android:divider="@drawable/divider_vertical_10dp"
         android:paddingHorizontal="10dp">
 
         <TextView
@@ -35,7 +36,7 @@
             android:textStyle="bold"
             android:maxLines="1"
             android:ellipsize="end"
-            android:text="Title"/>
+            tools:text="@string/lorem_ipsum"/>
         <TextView
             android:id="@+id/overview_text_view"
             android:layout_width="match_parent"
@@ -43,19 +44,27 @@
             android:textSize="16sp"
             android:maxLines="2"
             android:ellipsize="end"
-            android:text="Overview"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
-        <Button
-            android:id="@+id/detail_button"
+            tools:text="@string/lorem_ipsum"/>
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Detail"
-            />
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:showDividers="middle"
+            android:divider="@drawable/divider_horizontal_10dp"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/detail_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Detail"
+                />
+            <Button
+                android:id="@+id/detail_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
 </RelativeLayout>
