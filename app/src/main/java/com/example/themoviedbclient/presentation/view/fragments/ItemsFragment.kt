@@ -2,6 +2,7 @@ package com.example.themoviedbclient.presentation.view.fragments
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.themoviedbclient.data.model.ItemModel
 import com.example.themoviedbclient.data.util.Resource
@@ -9,7 +10,11 @@ import com.example.themoviedbclient.presentation.baseclass.fragment.BaseFragment
 import com.example.themoviedbclient.presentation.view.adapter.item.ItemViewAdapter
 import com.example.themoviedbclient.presentation.view.adapter.item.ItemViewData
 import com.example.themoviedbclient.presentation.viewmodel.item.ItemViewModelInterface
+import com.example.themoviedbclient.presentation.viewmodel.item.MovieViewModel
+import com.example.themoviedbclient.presentation.viewmodel.item.TvShowViewModel
 import com.example.themoviedbclient.presentation.viewmodel.items.ItemsViewModelInterFace
+import com.example.themoviedbclient.presentation.viewmodel.items.MoviesViewModel
+import com.example.themoviedbclient.presentation.viewmodel.items.TvShowsViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -25,12 +30,12 @@ class ItemsFragment: BaseFragmentList() {
 
         when(arguments?.getString("type")) {
             "movies" -> {
-                itemsViewModel = parent?.moviesViewModel
-                itemViewModel = parent?.movieViewModel
+                itemsViewModel = activityViewModels<MoviesViewModel>() as? ItemsViewModelInterFace
+                itemViewModel = activityViewModels<MovieViewModel>() as? ItemViewModelInterface
             }
             "tvShows" -> {
-                itemsViewModel = parent?.tvShowsViewModel
-                itemViewModel = parent?.tvShowViewModel
+                itemsViewModel = activityViewModels<TvShowsViewModel>() as? ItemsViewModelInterFace
+                itemViewModel = activityViewModels<TvShowViewModel>() as? ItemViewModelInterface
             }
         }
 
