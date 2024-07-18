@@ -11,9 +11,14 @@
         android:name="com.example.themoviedbclient.presentation.view.fragments.movie.MoviesFragment"
         tools:layout="@layout/base_fragment_list">
         <action
-            android:id="@+id/action_movies_to_movieDetail"
-            app:destination="@id/movieDetail"
-            />
+            android:id="@+id/action_movies_to_itemDetail"
+            app:destination="@id/itemDetail">
+            <argument
+                android:name="type"
+                app:argType="string"
+                android:defaultValue="movie"
+                />
+        </action>
     </fragment>
 
     <fragment
@@ -22,22 +27,24 @@
         android:name="com.example.themoviedbclient.presentation.view.fragments.tvshow.TvShowsFragment"
         tools:layout="@layout/base_fragment_list">
         <action
-            android:id="@+id/action_tvShows_to_tvShowDetail"
-            app:destination="@id/tvShowDetail"
+            android:id="@+id/action_tvShows_to_itemDetail"
+            app:destination="@id/itemDetail">
+            <argument
+                android:name="type"
+                app:argType="string"
+                android:defaultValue="tvShow"
+                />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/itemDetail"
+        android:label="Detail"
+        android:name="com.example.themoviedbclient.presentation.view.fragments.detail.item.DetailItemFragment"
+        tools:layout="@layout/item_detail_fragment_layout">
+        <argument
+            android:name="type"
+            app:argType="string"
             />
-    </fragment>
-
-    <fragment
-        android:id="@+id/movieDetail"
-        android:label="Detail"
-        android:name="com.example.themoviedbclient.presentation.view.fragments.detail.item.DetailItemFragment"
-        tools:layout="@layout/item_detail_fragment_layout">
-    </fragment>
-
-    <fragment
-        android:id="@+id/tvShowDetail"
-        android:label="Detail"
-        android:name="com.example.themoviedbclient.presentation.view.fragments.detail.item.DetailItemFragment"
-        tools:layout="@layout/item_detail_fragment_layout">
     </fragment>
 </navigation>

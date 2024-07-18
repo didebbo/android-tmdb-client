@@ -5,15 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import com.example.themoviedbclient.databinding.ItemDetailFragmentLayoutBinding
 import com.example.themoviedbclient.presentation.view.activity.MainActivity
-import com.example.themoviedbclient.presentation.viewmodel.detail.item.DetailItemViewModel
+import com.example.themoviedbclient.presentation.viewmodel.detail.DetailItemViewModel
 
 class DetailItemFragment: Fragment() {
 
-    private val viewModel: DetailItemViewModel by activityViewModels()
+    private var viewModel: DetailItemViewModel? = null
 
     private lateinit var binding: ItemDetailFragmentLayoutBinding
 
@@ -25,20 +24,36 @@ class DetailItemFragment: Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = ItemDetailFragmentLayoutBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val item = viewModel.getItem()
-        if(item != null) {
-            Glide.with(binding.root).load(viewModel.getImageFullPath(item.coverPath)).into(binding.coverImage)
-            binding.titleTextView.text = item.title
-            binding.overviewTextView.text = item.overview
-            if(item.saved) {
-                binding.saveButton.visibility = View.GONE
+
+        viewModel = when(arguments?.getString("type")) {
+            "movie" -> {
+                parent?.detailMovieViewModel
+            }
+            "tvShow" -> {
+                parent?.detailTvShowViewModel
+            }
+            else -> null
+        }
+
+        viewModel?.let {
+            binding(it)
+        }
+    }
+
+    private fun binding(viewModel: DetailItemViewModel) {
+        viewModel.item.observe(viewLifecycleOwner) {
+            it?.let {
+                Glide.with(binding.root).load(viewModel.getImageFullPath(it.coverPath)).into(binding.coverImage)
+                binding.titleTextView.text = it.title
+                binding.overviewTextView.text = it.overview
+                binding.saveButton.visibility = if(it.saved) View.GONE else View.VISIBLE
             }
         }
     }

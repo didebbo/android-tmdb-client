@@ -10,7 +10,7 @@ import com.example.themoviedbclient.data.util.Resource
 import com.example.themoviedbclient.presentation.baseclass.fragment.BaseFragmentList
 import com.example.themoviedbclient.presentation.view.adapter.item.ItemViewAdapter
 import com.example.themoviedbclient.presentation.view.adapter.item.ItemViewData
-import com.example.themoviedbclient.presentation.viewmodel.detail.item.DetailItemViewModel
+import com.example.themoviedbclient.presentation.viewmodel.detail.movie.DetailMovieViewModel
 import com.example.themoviedbclient.presentation.viewmodel.movie.MoviesViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
 class MoviesFragment: BaseFragmentList() {
 
     private val viewModel: MoviesViewModel by activityViewModels()
-    private val detailItemViewModel: DetailItemViewModel by activityViewModels()
+    private val detailItemViewModel: DetailMovieViewModel by activityViewModels()
 
     override fun afterOnViewCreated(view: View, savedInstanceState: Bundle?) {
         super.afterOnViewCreated(view, savedInstanceState)
@@ -58,7 +58,7 @@ class MoviesFragment: BaseFragmentList() {
                             item.saved,
                             onDetail = {
                                 detailItemViewModel.setItem(item)
-                                navController?.navigate(R.id.action_movies_to_movieDetail)
+                                navController?.navigate(R.id.action_movies_to_itemDetail)
                             },
                             onSave = {
                                 lifecycleScope.launch {

@@ -10,7 +10,9 @@ import com.example.themoviedbclient.data.util.Resource
 import com.example.themoviedbclient.presentation.baseclass.fragment.BaseFragmentList
 import com.example.themoviedbclient.presentation.view.adapter.item.ItemViewAdapter
 import com.example.themoviedbclient.presentation.view.adapter.item.ItemViewData
-import com.example.themoviedbclient.presentation.viewmodel.detail.item.DetailItemViewModel
+import com.example.themoviedbclient.presentation.viewmodel.detail.DetailItemViewModel
+import com.example.themoviedbclient.presentation.viewmodel.detail.movie.DetailMovieViewModel
+import com.example.themoviedbclient.presentation.viewmodel.detail.tvshow.DetailTvShowViewModel
 import com.example.themoviedbclient.presentation.viewmodel.tvshow.TvShowsViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,7 +22,7 @@ import kotlinx.coroutines.launch
 class TvShowsFragment: BaseFragmentList() {
 
     private val viewModel: TvShowsViewModel by activityViewModels()
-    private val detailItemViewModel: DetailItemViewModel by activityViewModels()
+    private val detailItemViewModel: DetailTvShowViewModel by activityViewModels()
 
     override fun afterOnViewCreated(view: View, savedInstanceState: Bundle?) {
         super.afterOnViewCreated(view, savedInstanceState)
@@ -59,10 +61,12 @@ class TvShowsFragment: BaseFragmentList() {
                             item.saved,
                             onDetail = {
                                 detailItemViewModel.setItem(item)
-                                navController?.navigate(R.id.action_tvShows_to_tvShowDetail)
+                                navController?.navigate(R.id.action_tvShows_to_itemDetail)
                             },
                             onSave = {
-
+                                lifecycleScope.launch {
+                                    viewModel.saveTvShow(item)
+                                }
                             }
                         )
                     }

@@ -4,12 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.themoviedbclient.data.dto.tvshow.TvShowDTO
 import com.example.themoviedbclient.data.model.ItemModel
 import com.example.themoviedbclient.data.util.Resource
 import com.example.themoviedbclient.domain.repository.tvshow.TvShowRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -29,6 +29,10 @@ class TvShowsViewModel @Inject constructor(
         _loader.postValue(state)
     }
 
+    fun getImageFullPath(path: String): String {
+        return tvShowRepository.getImageFullPath(path)
+    }
+
     suspend fun getTvShowsResource(){
         showLoader(true)
         viewModelScope.launch(Dispatchers.IO) {
@@ -36,7 +40,20 @@ class TvShowsViewModel @Inject constructor(
             showLoader(false)
         }
     }
-    fun getImageFullPath(path: String): String {
-        return tvShowRepository.getImageFullPath(path)
+
+    suspend fun saveTvShow(item: ItemModel) {
+        showLoader(true)
+        viewModelScope.launch(Dispatchers.IO) {
+            delay(1000) // Simulate workflow
+            tvShowRepository.saveTvShow(item)
+            val data = _tvShowsResource.value?.data?.map {
+                if(item.id == it.id) {
+                    it.saved = true
+                }
+                it
+            }
+            _tvShowsResource.postValue(Resource.Success(data))
+            showLoader(false)
+        }
     }
 }

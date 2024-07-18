@@ -10,6 +10,7 @@ import com.example.themoviedbclient.data.util.Resource
 import com.example.themoviedbclient.domain.repository.movie.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -44,6 +45,7 @@ class MoviesViewModel @Inject constructor(
     suspend fun saveMovie(item: ItemModel) {
         showLoader(true)
         viewModelScope.launch(Dispatchers.IO) {
+            delay(1000) // Simulate workflow
             movieRepository.saveMovie(item)
             val data = _moviesResource.value?.data?.map {
                 if(item.id == it.id) {
