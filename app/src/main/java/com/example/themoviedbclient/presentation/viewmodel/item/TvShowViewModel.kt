@@ -34,13 +34,15 @@ class TvShowViewModel @Inject constructor(
         _loader.postValue(state)
     }
 
-    override suspend fun saveItem(item: ItemModel) {
-        showLoader(true)
-        viewModelScope.launch(Dispatchers.IO) {
-            delay(1000) // Simulate workflow
-            tvShowRepository.saveItem(item)
-            setItem(item.copy(saved = true))
-            showLoader(false)
+    override suspend fun saveItem() {
+        item.value?.let {
+            showLoader(true)
+            viewModelScope.launch(Dispatchers.IO) {
+                delay(1000) // Simulate workflow
+                tvShowRepository.saveItem(it)
+                setItem(it.copy(saved = true))
+                showLoader(false)
+            }
         }
     }
 }

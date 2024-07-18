@@ -9,5 +9,5 @@ interface ItemViewModel {
     fun showLoader(state: Boolean)
     fun setItem(item: ItemModel)
     fun getImageFullPath(path: String): String
-    suspend fun saveItem(item: ItemModel)
+    suspend fun saveItem()
 }

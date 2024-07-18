@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.themoviedbclient.databinding.ItemDetailFragmentLayoutBinding
 import com.example.themoviedbclient.presentation.view.activity.MainActivity
 import com.example.themoviedbclient.presentation.viewmodel.item.ItemViewModel
+import kotlinx.coroutines.launch
 
 class ItemFragment: Fragment() {
 
@@ -44,6 +46,7 @@ class ItemFragment: Fragment() {
 
         viewModel?.let {
             binding(it)
+            setActions(it)
         }
     }
 
@@ -54,6 +57,16 @@ class ItemFragment: Fragment() {
                 binding.titleTextView.text = it.title
                 binding.overviewTextView.text = it.overview
                 binding.saveButton.visibility = if(it.saved) View.GONE else View.VISIBLE
+            }
+        }
+        viewModel.loader.observe(viewLifecycleOwner) {
+            parent?.showLoader(it)
+        }
+    }
+    private fun setActions(viewModel: ItemViewModel) {
+        binding.saveButton.setOnClickListener {
+            lifecycleScope.launch {
+                viewModel.saveItem()
             }
         }
     }

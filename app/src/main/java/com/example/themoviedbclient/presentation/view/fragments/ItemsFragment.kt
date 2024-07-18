@@ -36,9 +36,8 @@ class ItemsFragment: BaseFragmentList() {
 
         itemsViewModel?.let { itemsViewModel ->
             getResource(itemsViewModel)
-            bindLoader(itemsViewModel)
             itemViewModel?.let { itemViewModel ->
-                bindResource(itemsViewModel,itemViewModel)
+                binding(itemsViewModel,itemViewModel)
             }
         }
     }
@@ -48,14 +47,12 @@ class ItemsFragment: BaseFragmentList() {
             itemsViewModel.fetchItemsResource()
         }
     }
-
-    private fun bindLoader(itemsViewModel: ItemsViewModel) {
-        itemsViewModel.loader.observe(this) {
+    private fun binding(itemsViewModel: ItemsViewModel, itemViewModel: ItemViewModel) {
+        itemsViewModel.loader.observe(viewLifecycleOwner) {
             parent?.showLoader(it)
         }
-    }
-    private fun bindResource(itemsViewModel: ItemsViewModel, itemViewModel: ItemViewModel) {
-        itemsViewModel.itemsResource.observe(this) {
+
+        itemsViewModel.itemsResource.observe(viewLifecycleOwner) {
             when(it) {
                 is Resource.Error -> {
                     Snackbar.make(binding.root,"Error: ${it.message}",Snackbar.LENGTH_SHORT).show()
