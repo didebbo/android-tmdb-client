@@ -12,6 +12,7 @@ import com.example.themoviedbclient.presentation.view.adapter.item.ItemViewAdapt
 import com.example.themoviedbclient.presentation.view.adapter.item.ItemViewData
 import com.example.themoviedbclient.presentation.viewmodel.detail.item.DetailItemViewModel
 import com.example.themoviedbclient.presentation.viewmodel.tvshow.TvShowsViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -24,21 +25,30 @@ class TvShowsFragment: BaseFragmentList() {
     override fun afterOnViewCreated(view: View, savedInstanceState: Bundle?) {
         super.afterOnViewCreated(view, savedInstanceState)
 
+        getResource()
+        bindLoader()
+        bindResource()
+    }
+
+    private fun getResource() {
         lifecycleScope.launch {
             viewModel.getTvShowsResource()
         }
+    }
 
+    private fun bindLoader() {
+        viewModel.loader.observe(this) {
+            parent?.showLoader(it)
+        }
+    }
+
+    private fun bindResource() {
         viewModel.tvShowsDTOResource.observe(this) {
             when(it) {
-                is Resource.Loading -> {
-                    parent?.showLoader()
-                }
                 is Resource.Error -> {
-                    parent?.hideLoader()
-                    TODO("Handle Error UI")
+                    Snackbar.make(binding.root,"Error: ${it.message}", Snackbar.LENGTH_SHORT).show()
                 }
                 is Resource.Success -> {
-                    parent?.hideLoader()
                     val data: List<ItemModel> = it.data.orEmpty()
                     val items: List<ItemViewData> = data.map { item ->
                         ItemViewData(

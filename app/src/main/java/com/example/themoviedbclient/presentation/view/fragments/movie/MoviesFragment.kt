@@ -25,21 +25,29 @@ class MoviesFragment: BaseFragmentList() {
     override fun afterOnViewCreated(view: View, savedInstanceState: Bundle?) {
         super.afterOnViewCreated(view, savedInstanceState)
 
+        getResource()
+        bindLoader()
+        bindResource()
+    }
+
+    private fun getResource() {
         lifecycleScope.launch {
             viewModel.getMoviesResource()
         }
+    }
 
+    private fun bindLoader() {
+        viewModel.loader.observe(this) {
+            parent?.showLoader(it)
+        }
+    }
+    private fun bindResource() {
         viewModel.moviesResource.observe(this) {
             when(it) {
-                is Resource.Loading -> {
-                    parent?.showLoader()
-                }
                 is Resource.Error -> {
-                    parent?.hideLoader()
                     Snackbar.make(binding.root,"Error: ${it.message}",Snackbar.LENGTH_SHORT).show()
                 }
                 is Resource.Success -> {
-                    parent?.hideLoader()
                     val data: List<ItemModel> = it.data.orEmpty()
                     val items: List<ItemViewData> = data.map { item ->
                         ItemViewData(

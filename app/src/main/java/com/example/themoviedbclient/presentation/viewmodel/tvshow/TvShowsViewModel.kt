@@ -18,15 +18,22 @@ class TvShowsViewModel @Inject constructor(
     private val tvShowRepository: TvShowRepository
 ): ViewModel() {
 
-    private var _tvShowsResource: MutableLiveData<Resource<List<ItemModel>>> =
+    private val _tvShowsResource: MutableLiveData<Resource<List<ItemModel>>> =
         MutableLiveData(Resource.Null())
-
     val tvShowsDTOResource: LiveData<Resource<List<ItemModel>>> get() = _tvShowsResource
 
+    private val _loader: MutableLiveData<Boolean> = MutableLiveData(false)
+    val loader: LiveData<Boolean> get() = _loader
+
+    private fun showLoader(state: Boolean) {
+        _loader.postValue(state)
+    }
+
     suspend fun getTvShowsResource(){
-        _tvShowsResource.value = Resource.Loading()
+        showLoader(true)
         viewModelScope.launch(Dispatchers.IO) {
             _tvShowsResource.postValue(tvShowRepository.getTvShows("day", "en-US"))
+            showLoader(false)
         }
     }
     fun getImageFullPath(path: String): String {
