@@ -5,4 +5,5 @@ import com.example.themoviedbclient.data.model.ItemModel
 interface ItemRepositoryInterface {
     fun getImageFullPath(path: String): String
     suspend fun saveItem(item: ItemModel)
+    suspend fun deleteItem(item: ItemModel)
 }

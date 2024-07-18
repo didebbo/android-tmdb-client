@@ -3,10 +3,14 @@ package com.example.themoviedbclient.presentation.viewmodel.items
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.themoviedbclient.data.model.ItemModel
 import com.example.themoviedbclient.domain.repository.items.SavedItemRepository
 import com.example.themoviedbclient.domain.repository.items.SavedItemsRepositoryInterface
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -43,12 +47,19 @@ class SavedItemsViewModel @Inject constructor(
     }
 
     override suspend fun deleteMovie(item: ItemModel) {
-        savedItemsRepository.deleteMovie(item)
+        showLoader(true)
+        viewModelScope.launch(Dispatchers.IO) {
+            delay(1000)
+            savedItemsRepository.deleteMovie(item)
+            showLoader(false)
+        }
     }
 
     override suspend fun deleteTvShow(item: ItemModel) {
-        savedItemsRepository.deleteTvShow(item)
+        showLoader(false)
+        viewModelScope.launch(Dispatchers.IO) {
+            delay(1000)
+            showLoader(false)
+        }
     }
-
-
 }

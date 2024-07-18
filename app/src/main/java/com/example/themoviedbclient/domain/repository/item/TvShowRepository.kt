@@ -14,7 +14,26 @@ class TvShowRepository(
     }
 
     override suspend fun saveItem(item: ItemModel) {
-        val entity = EntityTvShow(item.id,item.title,item.overview,item.posterPath,item.coverPath)
-        tvShowDao.insertTvShow(entity)
+        tvShowDao.insertTvShow(
+            EntityTvShow(
+                item.id,
+                item.title,
+                item.overview,
+                item.posterPath,
+                item.coverPath
+            )
+        )
+    }
+
+    override suspend fun deleteItem(item: ItemModel) {
+        tvShowDao.deleteTvShow(
+            EntityTvShow(
+                item.id,
+                item.title,
+                item.overview,
+                item.posterPath,
+                item.coverPath
+            )
+        )
     }
 }

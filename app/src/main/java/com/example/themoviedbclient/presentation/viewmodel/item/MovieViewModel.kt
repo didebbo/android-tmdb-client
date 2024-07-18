@@ -46,4 +46,16 @@ class MovieViewModel @Inject constructor(
             }
         }
     }
+
+    override suspend fun deleteItem() {
+        item.value?.let {
+            showLoader(true)
+            viewModelScope.launch {
+                delay(1000)
+                movieRepository.deleteItem(it)
+                setItem(it.copy(saved = false))
+                showLoader(false)
+            }
+        }
+    }
 }

@@ -14,7 +14,26 @@ class MovieRepository(
     }
 
     override suspend fun saveItem(item: ItemModel) {
-        val entity = EntityMovie(item.id,item.title,item.overview,item.posterPath,item.coverPath)
-        movieDao.insertMovie(entity)
+        movieDao.insertMovie(
+            EntityMovie(
+                item.id,
+                item.title,
+                item.overview,
+                item.posterPath,
+                item.coverPath
+            )
+        )
+    }
+
+    override suspend fun deleteItem(item: ItemModel) {
+        movieDao.deleteMovie(
+            EntityMovie(
+                item.id,
+                item.title,
+                item.overview,
+                item.posterPath,
+                item.coverPath
+            )
+        )
     }
 }

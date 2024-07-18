@@ -10,4 +10,5 @@ interface ItemViewModelInterface {
     fun setItem(item: ItemModel)
     fun getImageFullPath(path: String): String
     suspend fun saveItem()
+    suspend fun deleteItem()
 }

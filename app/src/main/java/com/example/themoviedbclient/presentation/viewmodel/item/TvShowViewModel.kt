@@ -45,4 +45,16 @@ class TvShowViewModel @Inject constructor(
             }
         }
     }
+
+    override suspend fun deleteItem() {
+        item.value?.let {
+            showLoader(true)
+            viewModelScope.launch {
+                delay(1000)
+                tvShowRepository.deleteItem(it)
+                setItem(it.copy(saved = false))
+                showLoader(false)
+            }
+        }
+    }
 }
