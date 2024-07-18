@@ -1,11 +1,13 @@
 package com.example.themoviedbclient.presentation.view.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.themoviedbclient.databinding.ItemDetailFragmentLayoutBinding
@@ -13,6 +15,7 @@ import com.example.themoviedbclient.presentation.view.activity.MainActivity
 import com.example.themoviedbclient.presentation.viewmodel.item.ItemViewModelInterface
 import com.example.themoviedbclient.presentation.viewmodel.item.MovieViewModel
 import com.example.themoviedbclient.presentation.viewmodel.item.TvShowViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 class ItemFragment: Fragment() {
@@ -39,10 +42,10 @@ class ItemFragment: Fragment() {
 
         viewModel = when(arguments?.getString("type")) {
             "movie" -> {
-                activityViewModels<MovieViewModel>() as? ItemViewModelInterface
+                activityViewModels<MovieViewModel>().value
             }
             "tvShow" -> {
-                activityViewModels<TvShowViewModel>() as? ItemViewModelInterface
+                activityViewModels<TvShowViewModel>().value
             }
             else -> null
         }

@@ -1,8 +1,10 @@
 package com.example.themoviedbclient.presentation.view.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.themoviedbclient.data.model.ItemModel
 import com.example.themoviedbclient.data.util.Resource
@@ -19,7 +21,6 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-@AndroidEntryPoint
 class ItemsFragment: BaseFragmentList() {
 
     private var itemsViewModel: ItemsViewModelInterFace? = null
@@ -30,12 +31,12 @@ class ItemsFragment: BaseFragmentList() {
 
         when(arguments?.getString("type")) {
             "movies" -> {
-                itemsViewModel = activityViewModels<MoviesViewModel>() as? ItemsViewModelInterFace
-                itemViewModel = activityViewModels<MovieViewModel>() as? ItemViewModelInterface
+                itemsViewModel = activityViewModels<MoviesViewModel>().value
+                itemViewModel = activityViewModels<MovieViewModel>().value
             }
             "tvShows" -> {
-                itemsViewModel = activityViewModels<TvShowsViewModel>() as? ItemsViewModelInterFace
-                itemViewModel = activityViewModels<TvShowViewModel>() as? ItemViewModelInterface
+                itemsViewModel = activityViewModels<TvShowsViewModel>().value
+                itemViewModel = activityViewModels<TvShowViewModel>().value
             }
         }
 

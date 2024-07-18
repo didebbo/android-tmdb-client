@@ -8,6 +8,7 @@ import com.example.themoviedbclient.presentation.viewmodel.items.MoviesViewModel
 import com.example.themoviedbclient.presentation.viewmodel.items.SavedItemsViewModel
 import com.example.themoviedbclient.presentation.viewmodel.items.TvShowsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity: ActivityBaseClass()
+class MainActivity: ActivityBaseClass() {}

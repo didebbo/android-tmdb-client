@@ -2,6 +2,7 @@ package com.example.themoviedbclient.presentation.viewmodel.item
 
 import androidx.lifecycle.LiveData
 import com.example.themoviedbclient.data.model.ItemModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 
 interface ItemViewModelInterface {
     val loader: LiveData<Boolean>
