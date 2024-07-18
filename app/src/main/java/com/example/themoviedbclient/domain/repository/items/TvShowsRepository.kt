@@ -1,4 +1,4 @@
-package com.example.themoviedbclient.domain.repository.tvshow
+package com.example.themoviedbclient.domain.repository.items
 
 import com.example.themoviedbclient.data.datasource.local.dao.TvShowDao
 import com.example.themoviedbclient.data.datasource.local.entity.EntityTvShow
@@ -9,27 +9,26 @@ import com.example.themoviedbclient.data.model.ItemModel
 import com.example.themoviedbclient.data.util.Resource
 import retrofit2.Response
 
-class TvShowRepositoryImpl(
+class TvShowsRepository(
     private val tvShowRemoteDataSource: TvShowRemoteDataSource,
     private val imagePathRemoteDataSource: ImagePathRemoteDataSource,
     private val tvShowDao: TvShowDao
-): TvShowRepository {
-    override suspend fun getTvShows(timeWindow: String, language: String): Resource<List<ItemModel>> {
+): ItemsRepository {
+    override suspend fun getItems(): Resource<List<ItemModel>> {
         return responseToResource(tvShowRemoteDataSource.getTvShows())
     }
-
-    override suspend fun getSavedTvShows(): List<ItemModel> {
+    override suspend fun getSavedItems(): List<ItemModel> {
         return tvShowDao.getTvShows().map {
             ItemModel(it.id,it.title,it.overview,it.posterPath,it.coverPath,true)
         }
     }
 
-    override suspend fun saveTvShow(item: ItemModel) {
+    override suspend fun saveItem(item: ItemModel) {
         val entity = EntityTvShow(item.id,item.title,item.overview,item.posterPath,item.coverPath)
         tvShowDao.insertTvShow(entity)
     }
 
-    override suspend fun deleteTvShow(item: ItemModel) {
+    override suspend fun deleteItem(item: ItemModel) {
         val entity = EntityTvShow(item.id,item.title,item.overview,item.posterPath,item.coverPath)
         tvShowDao.deleteTvShow(entity)
     }
@@ -40,7 +39,7 @@ class TvShowRepositoryImpl(
 
     private suspend fun responseToResource(response: Response<TvShowsDTO>): Resource<List<ItemModel>> {
         if(response.isSuccessful) {
-            val savedTvShows = getSavedTvShows().map { it.id }.toSet()
+            val savedTvShows = getSavedItems().map { it.id }.toSet()
             val result = response.body()?.result.orEmpty().map { dto ->
                 ItemModel( dto.id, dto.title, dto.overview, dto.posterPath, dto.coverPath,dto.id in savedTvShows)
             }

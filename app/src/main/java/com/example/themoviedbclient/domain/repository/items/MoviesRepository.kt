@@ -1,36 +1,35 @@
-package com.example.themoviedbclient.domain.repository.movie
+package com.example.themoviedbclient.domain.repository.items
 
-import android.util.Log
 import com.example.themoviedbclient.data.datasource.local.dao.MovieDao
 import com.example.themoviedbclient.data.datasource.local.entity.EntityMovie
 import com.example.themoviedbclient.data.datasource.remote.image.ImagePathRemoteDataSource
-import com.example.themoviedbclient.data.dto.movie.MoviesDTO
 import com.example.themoviedbclient.data.datasource.remote.movie.MovieRemoteDataSource
+import com.example.themoviedbclient.data.dto.movie.MoviesDTO
 import com.example.themoviedbclient.data.model.ItemModel
 import com.example.themoviedbclient.data.util.Resource
 import retrofit2.Response
 
-class MovieRepositoryImpl(
+class MoviesRepository(
     private val movieRemoteDataSource: MovieRemoteDataSource,
     private val imagePathRemoteDataSource: ImagePathRemoteDataSource,
     private val movieDao: MovieDao
-): MovieRepository {
-    override suspend fun getMovies(): Resource<List<ItemModel>> {
+): ItemsRepository {
+    override suspend fun getItems(): Resource<List<ItemModel>> {
         return  responseToResource(movieRemoteDataSource.getMovies())
     }
 
-    override suspend fun getSavedMovies(): List<ItemModel> {
+    override suspend fun getSavedItems(): List<ItemModel> {
         return movieDao.getMovies().map {
             ItemModel(it.id,it.title,it.overview,it.posterPath,it.coverPath,true)
         }
     }
 
-    override suspend fun saveMovie(item: ItemModel) {
+    override suspend fun saveItem(item: ItemModel) {
         val entity = EntityMovie(item.id,item.title,item.overview,item.posterPath,item.coverPath)
         movieDao.insertMovie(entity)
     }
 
-    override suspend fun deleteMovie(item: ItemModel) {
+    override suspend fun deleteItem(item: ItemModel) {
         val entity = EntityMovie(item.id,item.title,item.overview,item.posterPath,item.coverPath)
         movieDao.deleteMovie(entity)
     }
@@ -41,7 +40,7 @@ class MovieRepositoryImpl(
 
     private suspend fun responseToResource(response: Response<MoviesDTO>): Resource<List<ItemModel>> {
         if(response.isSuccessful) {
-            val savedMovies = getSavedMovies().map { it.id }.toSet()
+            val savedMovies = getSavedItems().map { it.id }.toSet()
             val result = response.body()?.result.orEmpty().map { dto ->
                 ItemModel( dto.id, dto.title, dto.overview, dto.posterPath, dto.coverPath,dto.id in savedMovies)
             }

@@ -29,7 +29,7 @@ abstract class BaseFragmentList: Fragment() {
         findNavController()
     }
 
-    val actionBar: ActionBar? by lazy {
+    private val actionBar: ActionBar? by lazy {
         parent?.supportActionBar
     }
 

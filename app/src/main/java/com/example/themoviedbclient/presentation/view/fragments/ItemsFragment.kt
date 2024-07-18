@@ -1,9 +1,8 @@
-package com.example.themoviedbclient.presentation.view.fragments.items
+package com.example.themoviedbclient.presentation.view.fragments
 
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
-import com.example.themoviedbclient.R
 import com.example.themoviedbclient.data.model.ItemModel
 import com.example.themoviedbclient.data.util.Resource
 import com.example.themoviedbclient.presentation.baseclass.fragment.BaseFragmentList

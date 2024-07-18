@@ -1,12 +1,11 @@
-package com.example.themoviedbclient.presentation.viewmodel.item.tvshow
+package com.example.themoviedbclient.presentation.viewmodel.item
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.themoviedbclient.data.model.ItemModel
-import com.example.themoviedbclient.domain.repository.detail.DetailTvShowRepositoryImpl
-import com.example.themoviedbclient.presentation.viewmodel.item.ItemViewModel
+import com.example.themoviedbclient.domain.repository.item.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -14,8 +13,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class TvShowViewModel @Inject constructor(
-    private val detailTvShowRepositoryImpl: DetailTvShowRepositoryImpl
+class MovieViewModel @Inject constructor(
+    private val movieRepository: MovieRepository
 ): ViewModel(), ItemViewModel {
 
     private val _loader: MutableLiveData<Boolean> = MutableLiveData(false)
@@ -27,8 +26,9 @@ class TvShowViewModel @Inject constructor(
     override fun setItem(item: ItemModel) {
         _item.postValue(item)
     }
-    override fun getImageFullPath(path: String): String {
-        return detailTvShowRepositoryImpl.getImageFullPath(path)
+
+    override  fun getImageFullPath(path: String): String {
+        return movieRepository.getImageFullPath(path)
     }
 
     override fun showLoader(state: Boolean) {
@@ -39,7 +39,7 @@ class TvShowViewModel @Inject constructor(
         showLoader(true)
         viewModelScope.launch(Dispatchers.IO) {
             delay(1000) // Simulate workflow
-            detailTvShowRepositoryImpl.saveItem(item)
+            movieRepository.saveItem(item)
             setItem(item.copy(saved = true))
             showLoader(false)
         }

@@ -1,14 +1,14 @@
-package com.example.themoviedbclient.domain.repository.detail
+package com.example.themoviedbclient.domain.repository.item
 
 import com.example.themoviedbclient.data.datasource.local.dao.MovieDao
 import com.example.themoviedbclient.data.datasource.local.entity.EntityMovie
 import com.example.themoviedbclient.data.datasource.remote.image.ImagePathRemoteDataSource
 import com.example.themoviedbclient.data.model.ItemModel
 
-class DetailMovieRepositoryImpl(
+class MovieRepository(
     private val imagePathRemoteDataSource: ImagePathRemoteDataSource,
     private val movieDao: MovieDao
-): DetailItemRepository {
+): ItemRepository {
     override fun getImageFullPath(path: String): String {
         return imagePathRemoteDataSource.getImageFullPath(path)
     }

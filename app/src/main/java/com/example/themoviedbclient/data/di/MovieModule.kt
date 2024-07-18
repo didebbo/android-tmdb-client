@@ -5,25 +5,32 @@ import com.example.themoviedbclient.data.datasource.local.dao.MovieDao
 import com.example.themoviedbclient.data.datasource.remote.image.ImagePathRemoteDataSource
 import com.example.themoviedbclient.data.datasource.remote.movie.MovieRemoteDataSource
 import com.example.themoviedbclient.data.datasource.remote.movie.MovieRemoteDataSourceImpl
-import com.example.themoviedbclient.domain.repository.movie.MovieRepository
-import com.example.themoviedbclient.domain.repository.movie.MovieRepositoryImpl
+import com.example.themoviedbclient.domain.repository.item.MovieRepository
+import com.example.themoviedbclient.domain.repository.items.MoviesRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import retrofit2.Retrofit
-import javax.inject.Named
 
 @Module
 @InstallIn(ViewModelComponent::class)
 object MovieModule {
     @Provides
-    fun provideMovieRepository(
+    fun provideMoviesRepository(
         movieRemoteDatasource: MovieRemoteDataSource,
         imagePathRemoteDataSource: ImagePathRemoteDataSource,
         movieDao: MovieDao
+    ): MoviesRepository {
+        return MoviesRepository(movieRemoteDatasource, imagePathRemoteDataSource,movieDao)
+    }
+
+    @Provides
+    fun provideMovieRepository(
+        imagePathRemoteDataSource: ImagePathRemoteDataSource,
+        movieDao: MovieDao
     ): MovieRepository {
-        return MovieRepositoryImpl(movieRemoteDatasource, imagePathRemoteDataSource,movieDao)
+        return MovieRepository(imagePathRemoteDataSource,movieDao)
     }
 
     @Provides

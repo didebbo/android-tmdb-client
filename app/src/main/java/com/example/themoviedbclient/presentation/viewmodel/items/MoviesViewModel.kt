@@ -1,4 +1,4 @@
-package com.example.themoviedbclient.presentation.viewmodel.items.tvshow
+package com.example.themoviedbclient.presentation.viewmodel.items
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,8 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.themoviedbclient.R
 import com.example.themoviedbclient.data.model.ItemModel
 import com.example.themoviedbclient.data.util.Resource
-import com.example.themoviedbclient.domain.repository.tvshow.TvShowRepository
-import com.example.themoviedbclient.presentation.viewmodel.items.ItemsViewModel
+import com.example.themoviedbclient.domain.repository.items.MoviesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -16,8 +15,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class TvShowsViewModel @Inject constructor(
-    private val tvShowRepository: TvShowRepository
+class MoviesViewModel @Inject constructor(
+    private val moviesRepository: MoviesRepository
 ): ViewModel(), ItemsViewModel {
 
     private val _itemsResource: MutableLiveData<Resource<List<ItemModel>>> =
@@ -32,17 +31,17 @@ class TvShowsViewModel @Inject constructor(
     }
 
     override fun getImageFullPath(path: String): String {
-        return tvShowRepository.getImageFullPath(path)
+        return moviesRepository.getImageFullPath(path)
     }
 
     override fun navigateToItemActionId(): Int {
-        return R.id.action_tvShows_to_itemDetail
+        return R.id.action_movies_to_itemDetail
     }
 
     override suspend fun fetchItemsResource(){
         showLoader(true)
         viewModelScope.launch(Dispatchers.IO) {
-            _itemsResource.postValue(tvShowRepository.getTvShows("day", "en-US"))
+            _itemsResource.postValue(moviesRepository.getItems())
             showLoader(false)
         }
     }
@@ -51,7 +50,7 @@ class TvShowsViewModel @Inject constructor(
         showLoader(true)
         viewModelScope.launch(Dispatchers.IO) {
             delay(1000) // Simulate workflow
-            tvShowRepository.saveTvShow(item)
+            moviesRepository.saveItem(item)
             val data = _itemsResource.value?.data?.map {
                 it.saved = it.id == item.id
                 it

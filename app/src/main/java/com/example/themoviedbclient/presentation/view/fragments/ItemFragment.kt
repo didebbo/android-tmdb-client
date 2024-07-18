@@ -1,4 +1,4 @@
-package com.example.themoviedbclient.presentation.view.fragments.item
+package com.example.themoviedbclient.presentation.view.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,7 @@ import com.example.themoviedbclient.databinding.ItemDetailFragmentLayoutBinding
 import com.example.themoviedbclient.presentation.view.activity.MainActivity
 import com.example.themoviedbclient.presentation.viewmodel.item.ItemViewModel
 
-class DetailItemFragment: Fragment() {
+class ItemFragment: Fragment() {
 
     private var viewModel: ItemViewModel? = null
 

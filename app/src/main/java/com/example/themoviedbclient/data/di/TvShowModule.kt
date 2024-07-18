@@ -5,8 +5,8 @@ import com.example.themoviedbclient.data.datasource.local.dao.TvShowDao
 import com.example.themoviedbclient.data.datasource.remote.image.ImagePathRemoteDataSource
 import com.example.themoviedbclient.data.datasource.remote.tvshow.TvShowRemoteDataSource
 import com.example.themoviedbclient.data.datasource.remote.tvshow.TvShowRemoteDataSourceImpl
-import com.example.themoviedbclient.domain.repository.tvshow.TvShowRepository
-import com.example.themoviedbclient.domain.repository.tvshow.TvShowRepositoryImpl
+import com.example.themoviedbclient.domain.repository.item.TvShowRepository
+import com.example.themoviedbclient.domain.repository.items.TvShowsRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,12 +18,20 @@ import retrofit2.Retrofit
 object TvShowModule {
 
     @Provides
-    fun provideTvShowRepository(
+    fun provideTvShowsRepository(
         tvShowRemoteDataSource: TvShowRemoteDataSource,
         imagePathRemoteDataSource: ImagePathRemoteDataSource,
         tvShowDao: TvShowDao
+    ): TvShowsRepository {
+        return TvShowsRepository(tvShowRemoteDataSource,imagePathRemoteDataSource,tvShowDao)
+    }
+
+    @Provides
+    fun provideTvShowRepository(
+        imagePathRemoteDataSource: ImagePathRemoteDataSource,
+        tvShowDao: TvShowDao
     ): TvShowRepository {
-        return TvShowRepositoryImpl(tvShowRemoteDataSource,imagePathRemoteDataSource,tvShowDao)
+        return TvShowRepository(imagePathRemoteDataSource,tvShowDao)
     }
 
     @Provides
