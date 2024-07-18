@@ -31,12 +31,16 @@ class ItemsFragment: BaseFragmentList() {
 
         when(arguments?.getString("type")) {
             "movies" -> {
-                itemsViewModel = activityViewModels<MoviesViewModel>().value
-                itemViewModel = activityViewModels<MovieViewModel>().value
+                val itemsViewModel: MoviesViewModel by activityViewModels()
+                val itemViewModel: MovieViewModel by activityViewModels()
+                this.itemsViewModel = itemsViewModel
+                this.itemViewModel = itemViewModel
             }
             "tvShows" -> {
-                itemsViewModel = activityViewModels<TvShowsViewModel>().value
-                itemViewModel = activityViewModels<TvShowViewModel>().value
+                val itemsViewModel: TvShowsViewModel by activityViewModels()
+                val itemViewModel: TvShowViewModel by activityViewModels()
+                this.itemsViewModel = itemsViewModel
+                this.itemViewModel = itemViewModel
             }
         }
 

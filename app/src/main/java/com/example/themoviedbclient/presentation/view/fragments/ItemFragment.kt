@@ -42,10 +42,12 @@ class ItemFragment: Fragment() {
 
         viewModel = when(arguments?.getString("type")) {
             "movie" -> {
-                activityViewModels<MovieViewModel>().value
+                val movieViewModel: MovieViewModel by activityViewModels()
+                movieViewModel
             }
             "tvShow" -> {
-                activityViewModels<TvShowViewModel>().value
+                val tvShowViewModel: TvShowViewModel by activityViewModels()
+                tvShowViewModel
             }
             else -> null
         }
