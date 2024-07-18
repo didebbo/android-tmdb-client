@@ -15,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MovieViewModel @Inject constructor(
     private val movieRepository: MovieRepository
-): ViewModel(), ItemViewModel {
+): ViewModel(), ItemViewModelInterface {
 
     private val _loader: MutableLiveData<Boolean> = MutableLiveData(false)
     override val loader: LiveData<Boolean> get() = _loader

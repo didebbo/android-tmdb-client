@@ -13,7 +13,7 @@ class TvShowsRepository(
     private val tvShowRemoteDataSource: TvShowRemoteDataSource,
     private val imagePathRemoteDataSource: ImagePathRemoteDataSource,
     private val tvShowDao: TvShowDao
-): ItemsRepository {
+): ItemsRepositoryInterface {
     override suspend fun getItems(): Resource<List<ItemModel>> {
         return responseToResource(tvShowRemoteDataSource.getTvShows())
     }
@@ -45,6 +45,6 @@ class TvShowsRepository(
             }
             return Resource.Success(result)
         }
-        else return Resource.Error(response.message())
+        return Resource.Error(response.message())
     }
 }

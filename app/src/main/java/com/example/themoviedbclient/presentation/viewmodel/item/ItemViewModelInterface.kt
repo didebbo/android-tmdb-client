@@ -3,7 +3,7 @@ package com.example.themoviedbclient.presentation.viewmodel.item
 import androidx.lifecycle.LiveData
 import com.example.themoviedbclient.data.model.ItemModel
 
-interface ItemViewModel {
+interface ItemViewModelInterface {
     val loader: LiveData<Boolean>
     val item: LiveData<ItemModel?>
     fun showLoader(state: Boolean)

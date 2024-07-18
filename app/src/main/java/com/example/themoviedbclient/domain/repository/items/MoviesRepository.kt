@@ -13,7 +13,7 @@ class MoviesRepository(
     private val movieRemoteDataSource: MovieRemoteDataSource,
     private val imagePathRemoteDataSource: ImagePathRemoteDataSource,
     private val movieDao: MovieDao
-): ItemsRepository {
+): ItemsRepositoryInterface {
     override suspend fun getItems(): Resource<List<ItemModel>> {
         return  responseToResource(movieRemoteDataSource.getMovies())
     }
@@ -46,6 +46,6 @@ class MoviesRepository(
             }
             return Resource.Success(result)
         }
-        else return Resource.Error(response.message())
+        return Resource.Error(response.message())
     }
 }

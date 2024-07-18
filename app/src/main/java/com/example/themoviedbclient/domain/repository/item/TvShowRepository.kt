@@ -8,7 +8,7 @@ import com.example.themoviedbclient.data.model.ItemModel
 class TvShowRepository(
     private val imagePathRemoteDataSource: ImagePathRemoteDataSource,
     private val tvShowDao: TvShowDao
-): ItemRepository {
+): ItemRepositoryInterface {
     override fun getImageFullPath(path: String): String {
         return imagePathRemoteDataSource.getImageFullPath(path)
     }

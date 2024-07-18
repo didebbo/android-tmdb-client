@@ -9,12 +9,12 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.themoviedbclient.databinding.ItemDetailFragmentLayoutBinding
 import com.example.themoviedbclient.presentation.view.activity.MainActivity
-import com.example.themoviedbclient.presentation.viewmodel.item.ItemViewModel
+import com.example.themoviedbclient.presentation.viewmodel.item.ItemViewModelInterface
 import kotlinx.coroutines.launch
 
 class ItemFragment: Fragment() {
 
-    private var viewModel: ItemViewModel? = null
+    private var viewModel: ItemViewModelInterface? = null
 
     private lateinit var binding: ItemDetailFragmentLayoutBinding
 
@@ -50,7 +50,7 @@ class ItemFragment: Fragment() {
         }
     }
 
-    private fun binding(viewModel: ItemViewModel) {
+    private fun binding(viewModel: ItemViewModelInterface) {
         viewModel.item.observe(viewLifecycleOwner) {
             it?.let {
                 Glide.with(binding.root).load(viewModel.getImageFullPath(it.coverPath)).into(binding.coverImage)
@@ -63,7 +63,7 @@ class ItemFragment: Fragment() {
             parent?.showLoader(it)
         }
     }
-    private fun setActions(viewModel: ItemViewModel) {
+    private fun setActions(viewModel: ItemViewModelInterface) {
         binding.saveButton.setOnClickListener {
             lifecycleScope.launch {
                 viewModel.saveItem()

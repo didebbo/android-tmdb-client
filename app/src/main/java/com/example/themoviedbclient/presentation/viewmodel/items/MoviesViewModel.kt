@@ -17,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MoviesViewModel @Inject constructor(
     private val moviesRepository: MoviesRepository
-): ViewModel(), ItemsViewModel {
+): ViewModel(), ItemsViewModelInterFace {
 
     private val _itemsResource: MutableLiveData<Resource<List<ItemModel>>> =
         MutableLiveData(Resource.Null())

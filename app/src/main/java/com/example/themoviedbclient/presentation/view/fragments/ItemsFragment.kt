@@ -8,8 +8,8 @@ import com.example.themoviedbclient.data.util.Resource
 import com.example.themoviedbclient.presentation.baseclass.fragment.BaseFragmentList
 import com.example.themoviedbclient.presentation.view.adapter.item.ItemViewAdapter
 import com.example.themoviedbclient.presentation.view.adapter.item.ItemViewData
-import com.example.themoviedbclient.presentation.viewmodel.item.ItemViewModel
-import com.example.themoviedbclient.presentation.viewmodel.items.ItemsViewModel
+import com.example.themoviedbclient.presentation.viewmodel.item.ItemViewModelInterface
+import com.example.themoviedbclient.presentation.viewmodel.items.ItemsViewModelInterFace
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -17,8 +17,8 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class ItemsFragment: BaseFragmentList() {
 
-    private var itemsViewModel: ItemsViewModel? = null
-    private var itemViewModel: ItemViewModel? = null
+    private var itemsViewModel: ItemsViewModelInterFace? = null
+    private var itemViewModel: ItemViewModelInterface? = null
 
     override fun afterOnViewCreated(view: View, savedInstanceState: Bundle?) {
         super.afterOnViewCreated(view, savedInstanceState)
@@ -42,12 +42,12 @@ class ItemsFragment: BaseFragmentList() {
         }
     }
 
-    private fun getResource(itemsViewModel: ItemsViewModel) {
+    private fun getResource(itemsViewModel: ItemsViewModelInterFace) {
         lifecycleScope.launch {
             itemsViewModel.fetchItemsResource()
         }
     }
-    private fun binding(itemsViewModel: ItemsViewModel, itemViewModel: ItemViewModel) {
+    private fun binding(itemsViewModel: ItemsViewModelInterFace, itemViewModel: ItemViewModelInterface) {
         itemsViewModel.loader.observe(viewLifecycleOwner) {
             parent?.showLoader(it)
         }

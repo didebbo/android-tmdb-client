@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import com.example.themoviedbclient.data.model.ItemModel
 import com.example.themoviedbclient.data.util.Resource
 
-interface ItemsViewModel {
+interface ItemsViewModelInterFace {
     val itemsResource: LiveData<Resource<List<ItemModel>>>
     val loader: LiveData<Boolean>
     fun showLoader(state: Boolean)

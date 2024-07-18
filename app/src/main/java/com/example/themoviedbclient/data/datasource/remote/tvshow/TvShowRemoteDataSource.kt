@@ -1,8 +1,13 @@
 package com.example.themoviedbclient.data.datasource.remote.tvshow
 
+import com.example.themoviedbclient.data.api.tvshow.TvShowApiService
 import com.example.themoviedbclient.data.dto.tvshow.TvShowsDTO
 import retrofit2.Response
 
-interface TvShowRemoteDataSource {
-    suspend fun getTvShows(): Response<TvShowsDTO>
+class TvShowRemoteDataSource(
+    private val tvShowApiService: TvShowApiService
+): TvShowRemoteDataSourceInterface {
+    override suspend fun getTvShows(): Response<TvShowsDTO> {
+        return tvShowApiService.getTvShows()
+    }
 }

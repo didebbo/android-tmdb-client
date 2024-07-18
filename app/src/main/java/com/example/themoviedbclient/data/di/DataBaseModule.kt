@@ -2,7 +2,6 @@ package com.example.themoviedbclient.data.di
 
 import android.content.Context
 import androidx.room.Room
-import androidx.room.RoomDatabase
 import com.example.themoviedbclient.data.datasource.local.LocalDatabase
 import com.example.themoviedbclient.data.datasource.local.dao.MovieDao
 import com.example.themoviedbclient.data.datasource.local.dao.TvShowDao

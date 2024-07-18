@@ -3,7 +3,7 @@ package com.example.themoviedbclient.domain.repository.items
 import com.example.themoviedbclient.data.model.ItemModel
 import com.example.themoviedbclient.data.util.Resource
 
-interface ItemsRepository {
+interface ItemsRepositoryInterface {
     suspend fun getItems(): Resource<List<ItemModel>>
     suspend fun getSavedItems(): List<ItemModel>
     suspend fun saveItem(item: ItemModel)

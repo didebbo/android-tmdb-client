@@ -2,11 +2,15 @@ package com.example.themoviedbclient.data.di
 
 import com.example.themoviedbclient.data.api.movie.MovieApiService
 import com.example.themoviedbclient.data.datasource.local.dao.MovieDao
+import com.example.themoviedbclient.data.datasource.local.dao.TvShowDao
 import com.example.themoviedbclient.data.datasource.remote.image.ImagePathRemoteDataSource
 import com.example.themoviedbclient.data.datasource.remote.movie.MovieRemoteDataSource
-import com.example.themoviedbclient.data.datasource.remote.movie.MovieRemoteDataSourceImpl
+import com.example.themoviedbclient.data.datasource.remote.tvshow.TvShowRemoteDataSource
 import com.example.themoviedbclient.domain.repository.item.MovieRepository
+import com.example.themoviedbclient.domain.repository.item.TvShowRepository
 import com.example.themoviedbclient.domain.repository.items.MoviesRepository
+import com.example.themoviedbclient.domain.repository.items.SavedItemRepository
+import com.example.themoviedbclient.domain.repository.items.TvShowsRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,7 +19,7 @@ import retrofit2.Retrofit
 
 @Module
 @InstallIn(ViewModelComponent::class)
-object MovieModule {
+object RepositoryModule {
     @Provides
     fun provideMoviesRepository(
         movieRemoteDatasource: MovieRemoteDataSource,
@@ -23,6 +27,15 @@ object MovieModule {
         movieDao: MovieDao
     ): MoviesRepository {
         return MoviesRepository(movieRemoteDatasource, imagePathRemoteDataSource,movieDao)
+    }
+
+    @Provides
+    fun provideTvShowsRepository(
+        tvShowRemoteDataSource: TvShowRemoteDataSource,
+        imagePathRemoteDataSource: ImagePathRemoteDataSource,
+        tvShowDao: TvShowDao
+    ): TvShowsRepository {
+        return TvShowsRepository(tvShowRemoteDataSource,imagePathRemoteDataSource,tvShowDao)
     }
 
     @Provides
@@ -34,12 +47,19 @@ object MovieModule {
     }
 
     @Provides
-    fun provideMovieRemoteDatasource(movieApiService: MovieApiService): MovieRemoteDataSource {
-        return MovieRemoteDataSourceImpl(movieApiService)
+    fun provideTvShowRepository(
+        imagePathRemoteDataSource: ImagePathRemoteDataSource,
+        tvShowDao: TvShowDao
+    ): TvShowRepository {
+        return TvShowRepository(imagePathRemoteDataSource,tvShowDao)
     }
 
     @Provides
-    fun provideMovieApiService(retrofit: Retrofit): MovieApiService {
-        return retrofit.create(MovieApiService::class.java)
+    fun provideSavedItemRepository(
+        imagePathRemoteDataSource: ImagePathRemoteDataSource,
+        movieDao: MovieDao,
+        tvShowDao: TvShowDao
+    ): SavedItemRepository {
+        return SavedItemRepository(imagePathRemoteDataSource,movieDao,tvShowDao)
     }
 }
