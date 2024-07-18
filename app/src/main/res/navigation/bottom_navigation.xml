@@ -8,43 +8,42 @@
     <fragment
         android:id="@+id/movies"
         android:label="Movies"
-        android:name="com.example.themoviedbclient.presentation.view.fragments.movie.MoviesFragment"
+        android:name="com.example.themoviedbclient.presentation.view.fragments.items.ItemsFragment"
         tools:layout="@layout/base_fragment_list">
+        <argument android:name="type"
+            app:argType="string"
+            android:defaultValue="movies"/>
         <action
             android:id="@+id/action_movies_to_itemDetail"
             app:destination="@id/itemDetail">
-            <argument
-                android:name="type"
+            <argument android:name="type"
                 app:argType="string"
-                android:defaultValue="movie"
-                />
+                android:defaultValue="movie"/>
         </action>
     </fragment>
 
     <fragment
         android:id="@+id/tvShows"
         android:label="Tv Shows"
-        android:name="com.example.themoviedbclient.presentation.view.fragments.tvshow.TvShowsFragment"
+        android:name="com.example.themoviedbclient.presentation.view.fragments.items.ItemsFragment"
         tools:layout="@layout/base_fragment_list">
+        <argument android:name="type"
+            app:argType="string"
+            android:defaultValue="tvShows"/>
         <action
             android:id="@+id/action_tvShows_to_itemDetail"
             app:destination="@id/itemDetail">
-            <argument
-                android:name="type"
+            <argument android:name="type"
                 app:argType="string"
-                android:defaultValue="tvShow"
-                />
+                android:defaultValue="tvShow"/>
         </action>
     </fragment>
 
     <fragment
         android:id="@+id/itemDetail"
         android:label="Detail"
-        android:name="com.example.themoviedbclient.presentation.view.fragments.detail.item.DetailItemFragment"
+        android:name="com.example.themoviedbclient.presentation.view.fragments.item.DetailItemFragment"
         tools:layout="@layout/item_detail_fragment_layout">
-        <argument
-            android:name="type"
-            app:argType="string"
-            />
+        <argument android:name="type" app:argType="string"/>
     </fragment>
 </navigation>

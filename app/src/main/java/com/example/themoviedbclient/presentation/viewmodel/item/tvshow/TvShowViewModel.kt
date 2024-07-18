@@ -1,4 +1,4 @@
-package com.example.themoviedbclient.presentation.viewmodel.detail.tvshow
+package com.example.themoviedbclient.presentation.viewmodel.item.tvshow
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.themoviedbclient.data.model.ItemModel
 import com.example.themoviedbclient.domain.repository.detail.DetailTvShowRepositoryImpl
-import com.example.themoviedbclient.presentation.viewmodel.detail.DetailItemViewModel
+import com.example.themoviedbclient.presentation.viewmodel.item.ItemViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -14,9 +14,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailTvShowViewModel @Inject constructor(
+class TvShowViewModel @Inject constructor(
     private val detailTvShowRepositoryImpl: DetailTvShowRepositoryImpl
-): ViewModel(), DetailItemViewModel {
+): ViewModel(), ItemViewModel {
 
     private val _loader: MutableLiveData<Boolean> = MutableLiveData(false)
     override val loader: LiveData<Boolean> get() = _loader

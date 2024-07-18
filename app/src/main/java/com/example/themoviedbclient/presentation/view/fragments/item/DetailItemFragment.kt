@@ -1,4 +1,4 @@
-package com.example.themoviedbclient.presentation.view.fragments.detail.item
+package com.example.themoviedbclient.presentation.view.fragments.item
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,11 +8,11 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.themoviedbclient.databinding.ItemDetailFragmentLayoutBinding
 import com.example.themoviedbclient.presentation.view.activity.MainActivity
-import com.example.themoviedbclient.presentation.viewmodel.detail.DetailItemViewModel
+import com.example.themoviedbclient.presentation.viewmodel.item.ItemViewModel
 
 class DetailItemFragment: Fragment() {
 
-    private var viewModel: DetailItemViewModel? = null
+    private var viewModel: ItemViewModel? = null
 
     private lateinit var binding: ItemDetailFragmentLayoutBinding
 
@@ -34,10 +34,10 @@ class DetailItemFragment: Fragment() {
 
         viewModel = when(arguments?.getString("type")) {
             "movie" -> {
-                parent?.detailMovieViewModel
+                parent?.movieViewModel
             }
             "tvShow" -> {
-                parent?.detailTvShowViewModel
+                parent?.tvShowViewModel
             }
             else -> null
         }
@@ -47,7 +47,7 @@ class DetailItemFragment: Fragment() {
         }
     }
 
-    private fun binding(viewModel: DetailItemViewModel) {
+    private fun binding(viewModel: ItemViewModel) {
         viewModel.item.observe(viewLifecycleOwner) {
             it?.let {
                 Glide.with(binding.root).load(viewModel.getImageFullPath(it.coverPath)).into(binding.coverImage)

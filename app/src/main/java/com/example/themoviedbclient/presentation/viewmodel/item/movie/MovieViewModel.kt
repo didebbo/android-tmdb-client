@@ -1,13 +1,12 @@
-package com.example.themoviedbclient.presentation.viewmodel.detail.movie
+package com.example.themoviedbclient.presentation.viewmodel.item.movie
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.themoviedbclient.data.model.ItemModel
-import com.example.themoviedbclient.data.util.Resource
 import com.example.themoviedbclient.domain.repository.detail.DetailMovieRepositoryImpl
-import com.example.themoviedbclient.presentation.viewmodel.detail.DetailItemViewModel
+import com.example.themoviedbclient.presentation.viewmodel.item.ItemViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -15,9 +14,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailMovieViewModel @Inject constructor(
+class MovieViewModel @Inject constructor(
     private val detailMovieRepositoryImpl: DetailMovieRepositoryImpl
-): ViewModel(), DetailItemViewModel {
+): ViewModel(), ItemViewModel {
 
     private val _loader: MutableLiveData<Boolean> = MutableLiveData(false)
     override val loader: LiveData<Boolean> get() = _loader
