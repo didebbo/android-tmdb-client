@@ -40,14 +40,9 @@ class TvShowRepositoryImpl(
 
     private suspend fun responseToResource(response: Response<TvShowsDTO>): Resource<List<ItemModel>> {
         if(response.isSuccessful) {
-            val savedTvShows = getSavedTvShows()
+            val savedTvShows = getSavedTvShows().map { it.id }.toSet()
             val result = response.body()?.result.orEmpty().map { dto ->
-                val itemModel = ItemModel( dto.id, dto.title, dto.overview, dto.posterPath, dto.coverPath,false).also { itemModel ->
-                    itemModel.saved = savedTvShows.any { savedItemModel ->
-                        savedItemModel.id == itemModel.id
-                    }
-                }
-                itemModel
+                ItemModel( dto.id, dto.title, dto.overview, dto.posterPath, dto.coverPath,dto.id in savedTvShows)
             }
             return Resource.Success(result)
         }

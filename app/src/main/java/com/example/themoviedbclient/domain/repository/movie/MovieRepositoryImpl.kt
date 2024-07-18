@@ -41,14 +41,9 @@ class MovieRepositoryImpl(
 
     private suspend fun responseToResource(response: Response<MoviesDTO>): Resource<List<ItemModel>> {
         if(response.isSuccessful) {
-            val savedMovies = getSavedMovies()
+            val savedMovies = getSavedMovies().map { it.id }.toSet()
             val result = response.body()?.result.orEmpty().map { dto ->
-                val itemModel = ItemModel( dto.id, dto.title, dto.overview, dto.posterPath, dto.coverPath,false).also { itemModel ->
-                    itemModel.saved = savedMovies.any { savedItemModel ->
-                        savedItemModel.id == itemModel.id
-                    }
-                }
-                itemModel
+                ItemModel( dto.id, dto.title, dto.overview, dto.posterPath, dto.coverPath,dto.id in savedMovies)
             }
             return Resource.Success(result)
         }
