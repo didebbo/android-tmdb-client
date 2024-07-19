@@ -1,5 +1,6 @@
 package com.example.themoviedbclient.presentation.viewmodel.items
 
+import android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -35,8 +36,10 @@ class SavedTvShowsViewModel @Inject constructor(
         return savedTvShowsRepository.getImageFullPath(path)
     }
 
-    override fun navigateToItemActionId(): Int {
-        return R.id.itemDetail
+    override fun navigateToItemIdWithArgs(): Pair<Int, Bundle?> {
+        return Pair(R.id.itemDetail, Bundle().apply {
+            putString("type","tvShow")
+        })
     }
 
     override suspend fun fetchSavedItems() {

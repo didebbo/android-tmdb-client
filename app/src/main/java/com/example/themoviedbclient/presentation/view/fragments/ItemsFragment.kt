@@ -1,11 +1,9 @@
 package com.example.themoviedbclient.presentation.view.fragments
 
-import android.content.ClipData.Item
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import com.example.themoviedbclient.data.datasource.remote.image.ImagePathRemoteDataSource
 import com.example.themoviedbclient.data.model.ItemModel
 import com.example.themoviedbclient.data.util.Resource
 import com.example.themoviedbclient.presentation.baseclass.fragment.BaseFragmentList
@@ -21,9 +19,7 @@ import com.example.themoviedbclient.presentation.viewmodel.items.SavedMoviesView
 import com.example.themoviedbclient.presentation.viewmodel.items.SavedTvShowsViewModel
 import com.example.themoviedbclient.presentation.viewmodel.items.TvShowsViewModel
 import com.google.android.material.snackbar.Snackbar
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 class ItemsFragment: BaseFragmentList() {
 
@@ -121,7 +117,9 @@ class ItemsFragment: BaseFragmentList() {
                 },
                 onDetail = { item ->
                     itemViewModel.setItem(item)
-                    navController?.navigate(savedItemsViewModel.navigateToItemActionId())
+                    savedItemsViewModel.navigateToItemIdWithArgs().let {
+                        navController?.navigate(it.first,it.second)
+                    }
                 },
                 onDelete = { item ->
                     lifecycleScope.launch {
