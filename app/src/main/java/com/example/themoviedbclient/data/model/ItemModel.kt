@@ -6,5 +6,6 @@ data class ItemModel(
     val overview: String,
     val posterPath: String,
     val coverPath: String,
-    var saved: Boolean
+    var saved: Boolean,
+    var fromRemote: Boolean
 )

@@ -20,7 +20,7 @@ class MoviesRepository(
 
     override suspend fun getSavedItems(): List<ItemModel> {
         return movieDao.getMovies().map {
-            ItemModel(it.id,it.title,it.overview,it.posterPath,it.coverPath,true)
+            ItemModel(it.id,it.title,it.overview,it.posterPath,it.coverPath,true,false)
         }
     }
 
@@ -42,7 +42,7 @@ class MoviesRepository(
         if(response.isSuccessful) {
             val savedMovies = getSavedItems().map { it.id }.toSet()
             val result = response.body()?.result.orEmpty().map { dto ->
-                ItemModel( dto.id, dto.title, dto.overview, dto.posterPath, dto.coverPath,dto.id in savedMovies)
+                ItemModel( dto.id, dto.title, dto.overview, dto.posterPath, dto.coverPath,dto.id in savedMovies, true)
             }
             return Resource.Success(result)
         }

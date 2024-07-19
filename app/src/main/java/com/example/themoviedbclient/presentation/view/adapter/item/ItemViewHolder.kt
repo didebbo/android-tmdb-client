@@ -18,10 +18,14 @@ sealed class ItemViewHolder(itemView: View): BaseViewHolder<View, ItemViewData>(
                 item.onDetail()
             }
             binding.saveButton.setOnClickListener {
-                item.onSave()
+                item.onSave?.invoke()
+            }
+            binding.deleteButton.setOnClickListener {
+                item.onDelete?.invoke()
             }
 
-            binding.saveButton.visibility = if(item.saved) View.GONE else View.VISIBLE
+            binding.saveButton.visibility = if(item.fromRemote && !item.saved) View.VISIBLE else View.GONE
+            binding.deleteButton.visibility = if(!item.fromRemote && item.saved) View.VISIBLE else View.GONE
         }
     }
 }

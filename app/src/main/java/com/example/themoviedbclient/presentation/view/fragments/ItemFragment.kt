@@ -64,7 +64,8 @@ class ItemFragment: Fragment() {
                 Glide.with(binding.root).load(viewModel.getImageFullPath(it.coverPath)).into(binding.coverImage)
                 binding.titleTextView.text = it.title
                 binding.overviewTextView.text = it.overview
-                binding.saveButton.visibility = if(it.saved) View.GONE else View.VISIBLE
+                binding.saveButton.visibility = if(it.fromRemote && !it.saved) View.VISIBLE else View.GONE
+                binding.deleteButton.visibility = if(!it.fromRemote && it.saved) View.VISIBLE else View.GONE
             }
         }
         viewModel.loader.observe(viewLifecycleOwner) {
@@ -75,6 +76,11 @@ class ItemFragment: Fragment() {
         binding.saveButton.setOnClickListener {
             lifecycleScope.launch {
                 viewModel.saveItem()
+            }
+        }
+        binding.deleteButton.setOnClickListener {
+            lifecycleScope.launch{
+                viewModel.deleteItem()
             }
         }
     }

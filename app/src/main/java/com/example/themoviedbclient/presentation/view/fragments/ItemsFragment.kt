@@ -14,6 +14,7 @@ import com.example.themoviedbclient.presentation.viewmodel.item.MovieViewModel
 import com.example.themoviedbclient.presentation.viewmodel.item.TvShowViewModel
 import com.example.themoviedbclient.presentation.viewmodel.items.ItemsViewModelInterFace
 import com.example.themoviedbclient.presentation.viewmodel.items.MoviesViewModel
+import com.example.themoviedbclient.presentation.viewmodel.items.SavedItemsViewModelInterface
 import com.example.themoviedbclient.presentation.viewmodel.items.TvShowsViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
@@ -33,6 +34,9 @@ class ItemsFragment: BaseFragmentList() {
                 val itemViewModel: TvShowViewModel by activityViewModels()
                 configureForRemoteResource(itemsViewModel,itemViewModel)
             }
+            "savedMoview" -> {
+                TODO()
+            }
         }
     }
 
@@ -41,9 +45,19 @@ class ItemsFragment: BaseFragmentList() {
         bindForRemoteItem(itemsViewModel,itemViewModel)
     }
 
+    private fun configureForSavedItems() {
+        TODO()
+    }
+
     private fun getRemoteResource(itemsViewModel: ItemsViewModelInterFace) {
         lifecycleScope.launch {
             itemsViewModel.fetchItemsResource()
+        }
+    }
+
+    private  fun getLocalItems(savedItemsViewModelInterface: SavedItemsViewModelInterface) {
+        lifecycleScope.launch {
+            TODO()
         }
     }
     private fun bindForRemoteItem(itemsViewModel: ItemsViewModelInterFace, itemViewModel: ItemViewModelInterface) {
@@ -65,6 +79,7 @@ class ItemsFragment: BaseFragmentList() {
                             itemViewModel.getImageFullPath(item.posterPath),
                             itemViewModel.getImageFullPath(item.coverPath),
                             item.saved,
+                            item.fromRemote,
                             onDetail = {
                                 itemViewModel.setItem(item)
                                 navController?.navigate(itemsViewModel.navigateToItemActionId())

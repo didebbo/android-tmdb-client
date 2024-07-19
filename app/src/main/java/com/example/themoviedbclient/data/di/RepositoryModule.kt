@@ -1,6 +1,5 @@
 package com.example.themoviedbclient.data.di
 
-import com.example.themoviedbclient.data.api.movie.MovieApiService
 import com.example.themoviedbclient.data.datasource.local.dao.MovieDao
 import com.example.themoviedbclient.data.datasource.local.dao.TvShowDao
 import com.example.themoviedbclient.data.datasource.remote.image.ImagePathRemoteDataSource
@@ -9,13 +8,13 @@ import com.example.themoviedbclient.data.datasource.remote.tvshow.TvShowRemoteDa
 import com.example.themoviedbclient.domain.repository.item.MovieRepository
 import com.example.themoviedbclient.domain.repository.item.TvShowRepository
 import com.example.themoviedbclient.domain.repository.items.MoviesRepository
-import com.example.themoviedbclient.domain.repository.items.SavedItemRepository
+import com.example.themoviedbclient.domain.repository.items.SavedMoviesRepository
+import com.example.themoviedbclient.domain.repository.items.SavedTvShowsRepository
 import com.example.themoviedbclient.domain.repository.items.TvShowsRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
-import retrofit2.Retrofit
 
 @Module
 @InstallIn(ViewModelComponent::class)
@@ -55,11 +54,18 @@ object RepositoryModule {
     }
 
     @Provides
-    fun provideSavedItemRepository(
+    fun provideSavedMoviesRepository(
         imagePathRemoteDataSource: ImagePathRemoteDataSource,
-        movieDao: MovieDao,
+        movieDao: MovieDao
+    ): SavedMoviesRepository {
+        return SavedMoviesRepository(movieDao, imagePathRemoteDataSource)
+    }
+
+    @Provides
+    fun provideSavedTvShowsRepository(
+        imagePathRemoteDataSource: ImagePathRemoteDataSource,
         tvShowDao: TvShowDao
-    ): SavedItemRepository {
-        return SavedItemRepository(imagePathRemoteDataSource,movieDao,tvShowDao)
+    ): SavedTvShowsRepository {
+        return SavedTvShowsRepository(tvShowDao,imagePathRemoteDataSource)
     }
 }

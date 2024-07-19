@@ -8,6 +8,8 @@ class ItemViewData(
     val posterPath: String,
     val coverPath: String,
     val saved: Boolean,
+    val fromRemote: Boolean,
     val onDetail: () -> Unit,
-    val onSave: () -> Unit
+    val onSave: (() -> Unit)? = null,
+    val onDelete: (() -> Unit)? = null
 ): BaseViewHolderItem()

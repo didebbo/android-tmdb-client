@@ -19,7 +19,7 @@ class TvShowsRepository(
     }
     override suspend fun getSavedItems(): List<ItemModel> {
         return tvShowDao.getTvShows().map {
-            ItemModel(it.id,it.title,it.overview,it.posterPath,it.coverPath,true)
+            ItemModel(it.id,it.title,it.overview,it.posterPath,it.coverPath,true, false)
         }
     }
 
@@ -41,7 +41,7 @@ class TvShowsRepository(
         if(response.isSuccessful) {
             val savedTvShows = getSavedItems().map { it.id }.toSet()
             val result = response.body()?.result.orEmpty().map { dto ->
-                ItemModel( dto.id, dto.title, dto.overview, dto.posterPath, dto.coverPath,dto.id in savedTvShows)
+                ItemModel( dto.id, dto.title, dto.overview, dto.posterPath, dto.coverPath,dto.id in savedTvShows, true)
             }
             return Resource.Success(result)
         }
