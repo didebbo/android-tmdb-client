@@ -36,7 +36,7 @@ class SavedTvShowsViewModel @Inject constructor(
     }
 
     override fun navigateToItemActionId(): Int {
-        return R.id.action_savedTvShows_to_itemDetail
+        return R.id.itemDetail
     }
 
     override suspend fun fetchSavedItems() {

@@ -35,7 +35,7 @@ class SavedMoviesViewModel @Inject constructor(
     }
 
     override fun navigateToItemActionId(): Int {
-        return R.id.action_savedMovies_to_itemDetail
+        return R.id.itemDetail
     }
 
     override suspend fun fetchSavedItems() {

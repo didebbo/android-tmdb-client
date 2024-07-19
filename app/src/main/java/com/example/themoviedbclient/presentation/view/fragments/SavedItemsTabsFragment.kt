@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
-import com.example.themoviedbclient.R
 import com.example.themoviedbclient.databinding.SavedItemsTabsFragmentLayoutBinding
 import com.example.themoviedbclient.presentation.view.activity.MainActivity
 import com.google.android.material.tabs.TabLayout
@@ -17,10 +16,6 @@ class SavedItemsTabsFragment: Fragment() {
 
     private lateinit var binding: SavedItemsTabsFragmentLayoutBinding
 
-    private val parent: MainActivity? by lazy {
-        activity as? MainActivity
-    }
-
     private lateinit var savedItemsTabsAdapter: SavedItemsTabsAdapter
     private lateinit var viewPager: ViewPager2
     private lateinit var tabLayout: TabLayout
@@ -29,7 +24,7 @@ class SavedItemsTabsFragment: Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = SavedItemsTabsFragmentLayoutBinding.inflate(inflater,container,false)
         return binding.root
     }
@@ -45,13 +40,6 @@ class SavedItemsTabsFragment: Fragment() {
             val title = if(position == 0) "Movies" else "TvShows"
             tab.text = title
         }.attach()
-
-        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                val actionId = if (position == 0) R.id.action_savedItemsTab_to_savedMovies else R.id.action_savedItemsTab_to_savedTvShow
-                parent?.navController?.navigate(actionId)
-            }
-        })
     }
 }
 
@@ -60,6 +48,11 @@ class SavedItemsTabsAdapter(fragment: Fragment): FragmentStateAdapter(fragment) 
         return 2
     }
     override fun createFragment(position: Int): Fragment {
-        return Fragment()
+        val fragment = ItemsFragment()
+        val typeValue = if(position == 0) "savedMovies" else "savedTvShow"
+        fragment.arguments = Bundle().apply {
+            putString("type",typeValue)
+        }
+        return fragment
     }
 }
