@@ -40,6 +40,41 @@
     </fragment>
 
     <fragment
+        android:id="@+id/savedItemsTab"
+        android:label="Saved"
+        android:name="com.example.themoviedbclient.presentation.view.fragments.SavedItemsTabsFragment"
+        tools:layout="@layout/saved_items_tabs_fragment_layout">
+        <action
+            android:id="@+id/action_savedItemsTab_to_savedMovies"
+            app:destination="@id/savedMovies">
+            <argument android:name="type"
+                app:argType="string"
+                android:defaultValue="savedMovies"/>
+        </action>
+        <action
+            android:id="@+id/action_savedItemsTab_to_savedTvShow"
+            app:destination="@id/savedTvShow">
+            <argument android:name="type"
+                app:argType="string"
+                android:defaultValue="savedTvShow"/>
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/savedMovies"
+        android:label="Saved Movies"
+        android:name="com.example.themoviedbclient.presentation.view.fragments.ItemsFragment"
+        tools:layout="@layout/base_fragment_list">
+    </fragment>
+
+    <fragment
+        android:id="@+id/savedTvShow"
+        android:label="Saved TvShow"
+        android:name="com.example.themoviedbclient.presentation.view.fragments.ItemsFragment"
+        tools:layout="@layout/base_fragment_list">
+    </fragment>
+
+    <fragment
         android:id="@+id/itemDetail"
         android:label="Detail"
         android:name="com.example.themoviedbclient.presentation.view.fragments.ItemFragment"

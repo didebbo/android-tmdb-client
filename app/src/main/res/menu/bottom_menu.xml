@@ -10,4 +10,9 @@
         android:title="Tv Shows"
         android:icon="@drawable/ic_tv_gen_24px"
         />
+    <item
+        android:id="@+id/savedItemsTab"
+        android:title="Saved"
+        android:icon="@drawable/ic_tv_gen_24px"
+        />
 </menu>

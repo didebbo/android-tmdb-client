@@ -29,6 +29,11 @@ class MainActivity: ActivityBaseClass() {
                     navController.navigate(R.id.tvShows)
                     true
                 }
+                R.id.savedItemsTab -> {
+                    navController.popBackStack(R.id.itemDetail,false)
+                    navController.navigate(R.id.savedItemsTab)
+                    true
+                }
                 else -> true
             }
         }
