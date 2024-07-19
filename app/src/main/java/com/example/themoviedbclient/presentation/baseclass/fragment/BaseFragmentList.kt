@@ -50,7 +50,14 @@ abstract class BaseFragmentList: Fragment() {
         afterOnViewCreated(view, savedInstanceState)
     }
 
+    override fun onResume() {
+        super.onResume()
+        afterOnResume()
+    }
+
     open fun afterOnViewCreated(view: View, savedInstanceState: Bundle?) {}
+
+    open fun afterOnResume() {}
 
     fun <VH: BaseViewHolder<View, I>, I: BaseViewHolderItem> setAdapter(adapter: BaseRecyclerViewAdapter<VH, I>) {
         recyclerView.adapter = adapter

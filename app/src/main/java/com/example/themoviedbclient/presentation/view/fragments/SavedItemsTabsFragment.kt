@@ -20,6 +20,10 @@ class SavedItemsTabsFragment: Fragment() {
     private lateinit var viewPager: ViewPager2
     private lateinit var tabLayout: TabLayout
 
+    private val parent: MainActivity? by lazy {
+        activity as? MainActivity
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

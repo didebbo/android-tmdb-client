@@ -24,6 +24,8 @@ class ItemFragment: Fragment() {
 
     private lateinit var binding: ItemDetailFragmentLayoutBinding
 
+    private var title: String? = null
+
     private val parent: MainActivity? by lazy {
         activity as? MainActivity
     }
@@ -43,10 +45,12 @@ class ItemFragment: Fragment() {
         viewModel = when(arguments?.getString("type")) {
             "movie" -> {
                 val movieViewModel: MovieViewModel by activityViewModels()
+                title = "Movie"
                 movieViewModel
             }
             "tvShow" -> {
                 val tvShowViewModel: TvShowViewModel by activityViewModels()
+                title = "Tv Show"
                 tvShowViewModel
             }
             else -> null
@@ -56,6 +60,11 @@ class ItemFragment: Fragment() {
             binding(it)
             setActions(it)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        parent?.supportActionBar?.title = title
     }
 
     private fun binding(viewModel: ItemViewModelInterface) {

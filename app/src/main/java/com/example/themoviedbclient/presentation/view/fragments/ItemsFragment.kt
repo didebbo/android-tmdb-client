@@ -23,6 +23,8 @@ import kotlinx.coroutines.launch
 
 class ItemsFragment: BaseFragmentList() {
 
+    private var title: String? = null
+
     override fun afterOnViewCreated(view: View, savedInstanceState: Bundle?) {
         super.afterOnViewCreated(view, savedInstanceState)
 
@@ -30,24 +32,32 @@ class ItemsFragment: BaseFragmentList() {
             "movies" -> {
                 val itemsViewModel: MoviesViewModel by activityViewModels()
                 val itemViewModel: MovieViewModel by activityViewModels()
+                title = "Movies"
                 configureForRemoteResource(itemsViewModel,itemViewModel)
             }
             "tvShows" -> {
                 val itemsViewModel: TvShowsViewModel by activityViewModels()
                 val itemViewModel: TvShowViewModel by activityViewModels()
+                title = "Tv Shows"
                 configureForRemoteResource(itemsViewModel,itemViewModel)
             }
             "savedMovies" -> {
                 val savedItemsViewModel: SavedMoviesViewModel by activityViewModels()
                 val itemViewModel: MovieViewModel by activityViewModels()
+                title = "Saved Movies"
                 configureForSavedItems(savedItemsViewModel,itemViewModel)
             }
             "savedTvShow" -> {
                 val savedItemsViewModel: SavedTvShowsViewModel by activityViewModels()
                 val itemViewModel: TvShowViewModel by activityViewModels()
+                title = "Saved Tv Shows"
                 configureForSavedItems(savedItemsViewModel,itemViewModel)
             }
         }
+    }
+
+    override fun afterOnResume() {
+        parent?.supportActionBar?.title = title
     }
 
     private fun configureForRemoteResource(itemsViewModel: ItemsViewModelInterFace, itemViewModel: ItemViewModelInterface) {
