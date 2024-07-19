@@ -53,7 +53,7 @@
         </action>
         <action
             android:id="@+id/action_savedItemsTab_to_savedTvShow"
-            app:destination="@id/savedTvShow">
+            app:destination="@id/savedTvShows">
             <argument android:name="type"
                 app:argType="string"
                 android:defaultValue="savedTvShow"/>
@@ -65,13 +65,27 @@
         android:label="Saved Movies"
         android:name="com.example.themoviedbclient.presentation.view.fragments.ItemsFragment"
         tools:layout="@layout/base_fragment_list">
+        <action
+            android:id="@+id/action_savedMovies_to_itemDetail"
+            app:destination="@id/itemDetail">
+            <argument android:name="type"
+                app:argType="string"
+                android:defaultValue="movie"/>
+        </action>
     </fragment>
 
     <fragment
-        android:id="@+id/savedTvShow"
+        android:id="@+id/savedTvShows"
         android:label="Saved TvShow"
         android:name="com.example.themoviedbclient.presentation.view.fragments.ItemsFragment"
         tools:layout="@layout/base_fragment_list">
+        <action
+            android:id="@+id/action_savedTvShows_to_itemDetail"
+            app:destination="@id/itemDetail">
+            <argument android:name="type"
+                app:argType="string"
+                android:defaultValue="tvShow"/>
+        </action>
     </fragment>
 
     <fragment

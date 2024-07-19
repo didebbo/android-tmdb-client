@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.themoviedbclient.R
 import com.example.themoviedbclient.data.model.ItemModel
 import com.example.themoviedbclient.domain.repository.items.SavedMoviesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -34,7 +35,7 @@ class SavedMoviesViewModel @Inject constructor(
     }
 
     override fun navigateToItemActionId(): Int {
-        TODO("Not yet implemented")
+        return R.id.action_savedMovies_to_itemDetail
     }
 
     override suspend fun fetchSavedItems() {
