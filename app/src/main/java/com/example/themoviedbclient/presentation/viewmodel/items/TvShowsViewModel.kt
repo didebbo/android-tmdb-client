@@ -52,7 +52,7 @@ class TvShowsViewModel @Inject constructor(
             delay(1000) // Simulate workflow
             tvShowsRepository.saveItem(item)
             val data = _itemsResource.value?.data?.map {
-                it.saved = it.id == item.id
+                if(it.id == item.id) it.saved = true
                 it
             }
             _itemsResource.postValue(Resource.Success(data))

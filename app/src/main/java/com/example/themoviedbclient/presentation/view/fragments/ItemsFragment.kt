@@ -1,10 +1,8 @@
 package com.example.themoviedbclient.presentation.view.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.themoviedbclient.data.model.ItemModel
 import com.example.themoviedbclient.data.util.Resource
@@ -18,14 +16,9 @@ import com.example.themoviedbclient.presentation.viewmodel.items.ItemsViewModelI
 import com.example.themoviedbclient.presentation.viewmodel.items.MoviesViewModel
 import com.example.themoviedbclient.presentation.viewmodel.items.TvShowsViewModel
 import com.google.android.material.snackbar.Snackbar
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 class ItemsFragment: BaseFragmentList() {
-
-    private var itemsViewModel: ItemsViewModelInterFace? = null
-    private var itemViewModel: ItemViewModelInterface? = null
-
     override fun afterOnViewCreated(view: View, savedInstanceState: Bundle?) {
         super.afterOnViewCreated(view, savedInstanceState)
 
@@ -33,31 +26,27 @@ class ItemsFragment: BaseFragmentList() {
             "movies" -> {
                 val itemsViewModel: MoviesViewModel by activityViewModels()
                 val itemViewModel: MovieViewModel by activityViewModels()
-                this.itemsViewModel = itemsViewModel
-                this.itemViewModel = itemViewModel
+                configureForRemoteResource(itemsViewModel,itemViewModel)
             }
             "tvShows" -> {
                 val itemsViewModel: TvShowsViewModel by activityViewModels()
                 val itemViewModel: TvShowViewModel by activityViewModels()
-                this.itemsViewModel = itemsViewModel
-                this.itemViewModel = itemViewModel
-            }
-        }
-
-        itemsViewModel?.let { itemsViewModel ->
-            getResource(itemsViewModel)
-            itemViewModel?.let { itemViewModel ->
-                binding(itemsViewModel,itemViewModel)
+                configureForRemoteResource(itemsViewModel,itemViewModel)
             }
         }
     }
 
-    private fun getResource(itemsViewModel: ItemsViewModelInterFace) {
+    private fun configureForRemoteResource(itemsViewModel: ItemsViewModelInterFace, itemViewModel: ItemViewModelInterface) {
+        getRemoteResource(itemsViewModel)
+        bindForRemoteItem(itemsViewModel,itemViewModel)
+    }
+
+    private fun getRemoteResource(itemsViewModel: ItemsViewModelInterFace) {
         lifecycleScope.launch {
             itemsViewModel.fetchItemsResource()
         }
     }
-    private fun binding(itemsViewModel: ItemsViewModelInterFace, itemViewModel: ItemViewModelInterface) {
+    private fun bindForRemoteItem(itemsViewModel: ItemsViewModelInterFace, itemViewModel: ItemViewModelInterface) {
         itemsViewModel.loader.observe(viewLifecycleOwner) {
             parent?.showLoader(it)
         }
