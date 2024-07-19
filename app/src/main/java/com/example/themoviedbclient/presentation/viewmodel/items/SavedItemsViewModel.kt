@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.themoviedbclient.data.model.ItemModel
 import com.example.themoviedbclient.domain.repository.items.SavedItemRepository
-import com.example.themoviedbclient.domain.repository.items.SavedItemsRepositoryInterface
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -18,13 +17,13 @@ class SavedItemsViewModel @Inject constructor(
     private val savedItemsRepository: SavedItemRepository
 ): ViewModel(), SavedItemsViewModelInterface {
 
-    private val _moview: MutableLiveData<List<ItemModel>> = MutableLiveData(listOf())
+    private val _movies: MutableLiveData<List<ItemModel>> = MutableLiveData(listOf())
     override val movies: LiveData<List<ItemModel>>
-        get() = _moview
+        get() = _movies
 
-    private val _tvShowsResource: MutableLiveData<List<ItemModel>> = MutableLiveData(listOf())
-    override val tvShowsResource: LiveData<List<ItemModel>>
-        get() = _tvShowsResource
+    private val _tvShows: MutableLiveData<List<ItemModel>> = MutableLiveData(listOf())
+    override val tvShows: LiveData<List<ItemModel>>
+        get() = _tvShows
 
     private val _loader: MutableLiveData<Boolean> = MutableLiveData(false)
     override val loader: LiveData<Boolean>
@@ -46,11 +45,28 @@ class SavedItemsViewModel @Inject constructor(
         TODO("Not yet implemented")
     }
 
+    override fun fetchSavedMovies() {
+        showLoader(true)
+        viewModelScope.launch(Dispatchers.IO) {
+            _movies.postValue(savedItemsRepository.getSavedMovies())
+            showLoader(false)
+        }
+    }
+
+    override fun fetchSavedTvShows() {
+        showLoader(true)
+        viewModelScope.launch(Dispatchers.IO) {
+            _tvShows.postValue(savedItemsRepository.getSavedTvShows())
+            showLoader(false)
+        }
+    }
+
     override suspend fun deleteMovie(item: ItemModel) {
         showLoader(true)
         viewModelScope.launch(Dispatchers.IO) {
             delay(1000)
             savedItemsRepository.deleteMovie(item)
+            _movies.postValue(_movies.value?.filter { it.id != item.id } )
             showLoader(false)
         }
     }
@@ -59,6 +75,8 @@ class SavedItemsViewModel @Inject constructor(
         showLoader(false)
         viewModelScope.launch(Dispatchers.IO) {
             delay(1000)
+            savedItemsRepository.deleteTvShow(item)
+            _tvShows.postValue(_tvShows.value?.filter { it.id != item.id } )
             showLoader(false)
         }
     }
