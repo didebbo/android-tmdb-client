@@ -16,8 +16,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 abstract class ActivityBaseClass: AppCompatActivity() {
 
     private lateinit var binding: BaseActivityLayoutBinding
-    private lateinit var navController: NavController
-    private lateinit var bottomNavigationView: BottomNavigationView
+    lateinit var navController: NavController
+    lateinit var bottomNavigationView: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,24 +30,7 @@ abstract class ActivityBaseClass: AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        bottomNavigationView.setOnItemSelectedListener {
-            when(it.itemId) {
-                R.id.movies -> {
-                    navController.popBackStack(R.id.itemDetail,false)
-                    navController.navigate(R.id.movies)
-                    true
-                }
-                R.id.tvShows -> {
-                    navController.popBackStack(R.id.itemDetail,false)
-                    navController.navigate(R.id.tvShows)
-                    true
-                }
-                else -> true
-            }
-        }
-
         hideModalSystem()
-
         afterOnCreate()
     }
 
