@@ -42,7 +42,7 @@
     <fragment
         android:id="@+id/savedItemsTab"
         android:label="Saved"
-        android:name="com.example.themoviedbclient.presentation.view.fragments.SavedItemsTabsFragment"
+        android:name="com.example.themoviedbclient.presentation.view.fragments.saved.SavedItemsTabsFragment"
         tools:layout="@layout/saved_items_tabs_fragment_layout">
     </fragment>
 
