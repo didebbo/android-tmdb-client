@@ -11,6 +11,7 @@ import com.example.themoviedbclient.domain.repository.items.MoviesRepository
 import com.example.themoviedbclient.domain.repository.items.SavedMoviesRepository
 import com.example.themoviedbclient.domain.repository.items.SavedTvShowsRepository
 import com.example.themoviedbclient.domain.repository.items.TvShowsRepository
+import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,18 +24,20 @@ object RepositoryModule {
     fun provideMoviesRepository(
         movieRemoteDatasource: MovieRemoteDataSource,
         imagePathRemoteDataSource: ImagePathRemoteDataSource,
-        movieDao: MovieDao
+        movieDao: MovieDao,
+        gson: Gson
     ): MoviesRepository {
-        return MoviesRepository(movieRemoteDatasource, imagePathRemoteDataSource,movieDao)
+        return MoviesRepository(movieRemoteDatasource, imagePathRemoteDataSource,movieDao,gson)
     }
 
     @Provides
     fun provideTvShowsRepository(
         tvShowRemoteDataSource: TvShowRemoteDataSource,
         imagePathRemoteDataSource: ImagePathRemoteDataSource,
-        tvShowDao: TvShowDao
+        tvShowDao: TvShowDao,
+        gson: Gson
     ): TvShowsRepository {
-        return TvShowsRepository(tvShowRemoteDataSource,imagePathRemoteDataSource,tvShowDao)
+        return TvShowsRepository(tvShowRemoteDataSource,imagePathRemoteDataSource,tvShowDao,gson)
     }
 
     @Provides

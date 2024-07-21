@@ -1,18 +1,22 @@
 package com.example.themoviedbclient.domain.repository.items
 
+import android.util.Log
 import com.example.themoviedbclient.data.datasource.local.dao.MovieDao
 import com.example.themoviedbclient.data.datasource.local.entity.EntityMovie
 import com.example.themoviedbclient.data.datasource.remote.image.ImagePathRemoteDataSource
 import com.example.themoviedbclient.data.datasource.remote.movie.MovieRemoteDataSource
+import com.example.themoviedbclient.data.dto.ErrorDTO
 import com.example.themoviedbclient.data.dto.movie.MoviesDTO
 import com.example.themoviedbclient.data.model.ItemModel
 import com.example.themoviedbclient.data.util.Resource
+import com.google.gson.Gson
 import retrofit2.Response
 
 class MoviesRepository(
     private val movieRemoteDataSource: MovieRemoteDataSource,
     private val imagePathRemoteDataSource: ImagePathRemoteDataSource,
-    private val movieDao: MovieDao
+    private val movieDao: MovieDao,
+    private val gson: Gson
 ): ItemsRepositoryInterface {
     override suspend fun getItems(): Resource<List<ItemModel>> {
         return  responseToResource(movieRemoteDataSource.getMovies())
@@ -46,6 +50,7 @@ class MoviesRepository(
             }
             return Resource.Success(result)
         }
-        return Resource.Error(response.message())
+        val error: ErrorDTO = gson.fromJson(response.errorBody()?.charStream(), ErrorDTO::class.java)
+        return Resource.Error(error.statusMessage)
     }
 }

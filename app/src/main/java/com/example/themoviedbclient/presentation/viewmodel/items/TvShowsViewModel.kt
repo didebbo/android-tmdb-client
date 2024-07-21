@@ -59,4 +59,8 @@ class TvShowsViewModel @Inject constructor(
             showLoader(false)
         }
     }
+
+    override fun clearInvalidResource() {
+        _itemsResource.postValue(Resource.Null())
+    }
 }

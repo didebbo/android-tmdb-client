@@ -13,4 +13,5 @@ interface ItemsViewModelInterFace {
     fun navigateToItemActionId(): Int
     suspend fun fetchItemsResource()
     suspend fun saveItem(item: ItemModel)
+    fun clearInvalidResource()
 }

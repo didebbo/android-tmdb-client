@@ -19,6 +19,9 @@ abstract class ActivityBaseClass: AppCompatActivity() {
     lateinit var navController: NavController
     lateinit var bottomNavigationView: BottomNavigationView
 
+    private var alertOnAccept: (()->Unit)? = null
+    private var alertOnDecline: (()->Unit)? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = BaseActivityLayoutBinding.inflate(layoutInflater)
@@ -30,6 +33,16 @@ abstract class ActivityBaseClass: AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
+        binding.alertAcceptButton.setOnClickListener {
+            hideAlertView()
+            alertOnAccept?.invoke()
+        }
+
+        binding.alertDeclineButton.setOnClickListener {
+            hideAlertView()
+            alertOnDecline?.invoke()
+        }
+
         hideModalSystem()
         afterOnCreate()
     }
@@ -39,16 +52,15 @@ abstract class ActivityBaseClass: AppCompatActivity() {
     }
 
     private fun hideModalSystem() {
-        binding.progressBar.visibility = View.GONE
-        binding.modalSystem.visibility = View.GONE
+        hideLoader()
+        hideAlertView()
     }
     private fun showLoader() {
-        binding.modalSystem.visibility = View.VISIBLE
-        binding.progressBar.visibility = View.VISIBLE
+        binding.systemLoader.visibility = View.VISIBLE
     }
 
     private fun hideLoader() {
-        hideModalSystem()
+        binding.systemLoader.visibility = View.GONE
     }
 
     fun showLoader(state: Boolean) {
@@ -60,6 +72,18 @@ abstract class ActivityBaseClass: AppCompatActivity() {
                 hideLoader()
             }
         }
+    }
+
+    fun showAlertView(message: String, onAccept: (()->Unit)? = null, onDecline: (()->Unit)? = null ) {
+        binding.systemAlert.visibility = View.VISIBLE
+        binding.alertDeclineButton.visibility = if(onDecline != null) View.VISIBLE else View.GONE
+        binding.alertViewText.text = message
+        alertOnAccept = onAccept
+        alertOnDecline = onDecline
+    }
+
+    fun hideAlertView() {
+        binding.systemAlert.visibility = View.GONE
     }
 
     open fun afterOnCreate() {}

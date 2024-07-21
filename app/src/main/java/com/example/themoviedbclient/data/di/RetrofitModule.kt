@@ -2,6 +2,7 @@ package com.example.themoviedbclient.data.di
 
 import com.example.themoviedbclient.BuildConfig
 import com.example.themoviedbclient.data.util.AuthInterceptor
+import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -36,5 +37,10 @@ object RetrofitModule {
         return HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
+    }
+
+    @Provides
+    fun provideGson(): Gson {
+        return Gson()
     }
 }

@@ -1,8 +1,10 @@
 package com.example.themoviedbclient.presentation.view.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.themoviedbclient.data.model.ItemModel
 import com.example.themoviedbclient.data.util.Resource
@@ -91,7 +93,8 @@ class ItemsFragment: BaseFragmentList() {
         itemsViewModel.itemsResource.observe(viewLifecycleOwner) { it ->
             when(it) {
                 is Resource.Error -> {
-                    Snackbar.make(binding.root,"Error: ${it.message}",Snackbar.LENGTH_SHORT).show()
+                    parent?.showAlertView(it.message ?: "Undefined Error on loading data")
+                    itemsViewModel.clearInvalidResource()
                 }
                 is Resource.Success -> {
                     val data: List<ItemModel> = it.data.orEmpty()

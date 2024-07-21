@@ -37,7 +37,7 @@ class MoviesViewModel @Inject constructor(
     override fun navigateToItemActionId(): Int {
         return R.id.action_movies_to_itemDetail
     }
-
+    
     override suspend fun fetchItemsResource(){
         showLoader(true)
         viewModelScope.launch(Dispatchers.IO) {
@@ -58,5 +58,9 @@ class MoviesViewModel @Inject constructor(
             _itemsResource.postValue(Resource.Success(data))
             showLoader(false)
         }
+    }
+
+    override fun clearInvalidResource() {
+        _itemsResource.postValue(Resource.Null())
     }
 }

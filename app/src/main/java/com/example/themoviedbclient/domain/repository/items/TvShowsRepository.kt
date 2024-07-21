@@ -4,15 +4,18 @@ import com.example.themoviedbclient.data.datasource.local.dao.TvShowDao
 import com.example.themoviedbclient.data.datasource.local.entity.EntityTvShow
 import com.example.themoviedbclient.data.datasource.remote.image.ImagePathRemoteDataSource
 import com.example.themoviedbclient.data.datasource.remote.tvshow.TvShowRemoteDataSource
+import com.example.themoviedbclient.data.dto.ErrorDTO
 import com.example.themoviedbclient.data.dto.tvshow.TvShowsDTO
 import com.example.themoviedbclient.data.model.ItemModel
 import com.example.themoviedbclient.data.util.Resource
+import com.google.gson.Gson
 import retrofit2.Response
 
 class TvShowsRepository(
     private val tvShowRemoteDataSource: TvShowRemoteDataSource,
     private val imagePathRemoteDataSource: ImagePathRemoteDataSource,
-    private val tvShowDao: TvShowDao
+    private val tvShowDao: TvShowDao,
+    private val gson: Gson
 ): ItemsRepositoryInterface {
     override suspend fun getItems(): Resource<List<ItemModel>> {
         return responseToResource(tvShowRemoteDataSource.getTvShows())
@@ -45,6 +48,7 @@ class TvShowsRepository(
             }
             return Resource.Success(result)
         }
-        return Resource.Error(response.message())
+        val error: ErrorDTO = gson.fromJson(response.errorBody()?.charStream(), ErrorDTO::class.java)
+        return Resource.Error(error.statusMessage)
     }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -24,16 +25,64 @@
         android:layout_above="@id/bottom_navigation_view"
         app:defaultNavHost="true"
         app:navGraph="@navigation/bottom_navigation" />
+
     <RelativeLayout
-        android:visibility="visible"
-        android:id="@+id/modal_system"
+        android:id="@+id/system_alert"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/opacity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:layout_marginHorizontal="40dp"
+            android:layout_centerInParent="true"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/alert_view_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="@string/lorem_ipsum"
+                tools:maxLines="2"
+                android:textAlignment="center"
+                android:layout_marginBottom="20dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:showDividers="middle">
+
+                <Button
+                    android:id="@+id/alert_accept_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:text="Accept"/>
+                <Button
+                    android:id="@+id/alert_decline_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:text="Decline"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/system_loader"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clickable="true"
         android:background="@color/opacity">
+
         <ProgressBar
-            android:visibility="gone"
-            android:id="@+id/progress_bar"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
