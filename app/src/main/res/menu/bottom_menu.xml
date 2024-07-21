@@ -13,6 +13,6 @@
     <item
         android:id="@+id/savedItemsTab"
         android:title="Saved"
-        android:icon="@drawable/ic_tv_gen_24px"
+        android:icon="@drawable/ic_favorite_24px"
         />
 </menu>
