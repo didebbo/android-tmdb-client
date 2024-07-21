@@ -5,7 +5,7 @@ Applicazione realizzata in Android Studio
 ## Tecnologie usate
 
 - MVVM Pattern
-- Architettura Data| Repositories | Presentation
+- Architettura Data| Domain | Presentation
 - Dependency Injection con Dagger-Hilt
 - Retrofit per la comunicazioni con le API web di TMDB
 - Gson per la de/serializzazione di oggetti JSON
