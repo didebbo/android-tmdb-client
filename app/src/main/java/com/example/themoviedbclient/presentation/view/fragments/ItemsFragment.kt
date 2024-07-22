@@ -92,11 +92,15 @@ class ItemsFragment: BaseFragmentList() {
 
         itemsViewModel.itemsResource.observe(viewLifecycleOwner) { it ->
             when(it) {
+                is Resource.Loading -> {
+                    parent?.showLoader(true)
+                }
                 is Resource.Error -> {
                     parent?.showAlertView(it.message ?: "Undefined Error on loading data")
                     itemsViewModel.clearInvalidResource()
                 }
                 is Resource.Success -> {
+                    parent?.hideModalSystem()
                     val data: List<ItemModel> = it.data.orEmpty()
                     setAdapterWithData(
                         data = data,

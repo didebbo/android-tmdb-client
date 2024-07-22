@@ -39,10 +39,9 @@ class TvShowsViewModel @Inject constructor(
     }
 
     override suspend fun fetchItemsResource(){
-        showLoader(true)
+        _itemsResource.postValue(Resource.Loading())
         viewModelScope.launch(Dispatchers.IO) {
             _itemsResource.postValue(tvShowsRepository.getItems())
-            showLoader(false)
         }
     }
 

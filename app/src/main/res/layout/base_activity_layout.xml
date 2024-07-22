@@ -27,12 +27,13 @@
         app:navGraph="@navigation/bottom_navigation" />
 
     <RelativeLayout
-        android:id="@+id/system_alert"
+        android:id="@+id/modal_system"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clickable="true"
         android:background="@color/opacity">
-
         <LinearLayout
+            android:id="@+id/system_alert"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -73,16 +74,8 @@
             </LinearLayout>
 
         </LinearLayout>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/system_loader"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clickable="true"
-        android:background="@color/opacity">
-
         <ProgressBar
+            android:id="@+id/system_loader"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -50,17 +50,20 @@ abstract class ActivityBaseClass: AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
-
-    private fun hideModalSystem() {
-        hideLoader()
-        hideAlertView()
-    }
     private fun showLoader() {
+        hideModalSystem()
+        binding.modalSystem.visibility = View.VISIBLE
         binding.systemLoader.visibility = View.VISIBLE
     }
 
     private fun hideLoader() {
+        hideModalSystem()
+    }
+
+    fun hideModalSystem() {
         binding.systemLoader.visibility = View.GONE
+        binding.systemAlert.visibility = View.GONE
+        binding.modalSystem.visibility = View.GONE
     }
 
     fun showLoader(state: Boolean) {
@@ -75,6 +78,8 @@ abstract class ActivityBaseClass: AppCompatActivity() {
     }
 
     fun showAlertView(message: String, onAccept: (()->Unit)? = null, onDecline: (()->Unit)? = null ) {
+        hideModalSystem()
+        binding.modalSystem.visibility = View.VISIBLE
         binding.systemAlert.visibility = View.VISIBLE
         binding.alertDeclineButton.visibility = if(onDecline != null) View.VISIBLE else View.GONE
         binding.alertViewText.text = message
@@ -83,7 +88,7 @@ abstract class ActivityBaseClass: AppCompatActivity() {
     }
 
     fun hideAlertView() {
-        binding.systemAlert.visibility = View.GONE
+        hideModalSystem()
     }
 
     open fun afterOnCreate() {}
