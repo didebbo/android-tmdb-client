@@ -45,6 +45,7 @@ class SavedTvShowsViewModel @Inject constructor(
     override suspend fun fetchSavedItems() {
         showLoader(true)
         viewModelScope.launch(Dispatchers.IO) {
+            delay(1000)
             _items.postValue(savedTvShowsRepository.getSavedItems())
             showLoader(false)
         }
@@ -55,8 +56,11 @@ class SavedTvShowsViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             delay(1000)
             savedTvShowsRepository.deleteItem(item)
-            _items.postValue(_items.value?.filter { it.id != item.id } )
             showLoader(false)
+        }.invokeOnCompletion {
+            viewModelScope.launch(Dispatchers.IO) {
+                fetchSavedItems()
+            }
         }
     }
 }

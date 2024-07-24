@@ -41,6 +41,7 @@ class TvShowsViewModel @Inject constructor(
     override suspend fun fetchItemsResource(){
         _itemsResource.postValue(Resource.Loading())
         viewModelScope.launch(Dispatchers.IO) {
+            delay(1000)
             _itemsResource.postValue(tvShowsRepository.getItems())
         }
     }
@@ -50,12 +51,11 @@ class TvShowsViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             delay(1000) // Simulate workflow
             tvShowsRepository.saveItem(item)
-            val data = _itemsResource.value?.data?.map {
-                if(it.id == item.id) it.saved = true
-                it
-            }
-            _itemsResource.postValue(Resource.Success(data))
             showLoader(false)
+        }.invokeOnCompletion {
+            viewModelScope.launch(Dispatchers.IO) {
+                fetchItemsResource()
+            }
         }
     }
 

@@ -12,6 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -41,21 +42,22 @@ class MoviesViewModel @Inject constructor(
     override suspend fun fetchItemsResource(){
         _itemsResource.postValue(Resource.Loading())
         viewModelScope.launch(Dispatchers.IO) {
+            delay(1000)
             _itemsResource.postValue(moviesRepository.getItems())
         }
     }
 
     override suspend fun saveItem(item: ItemModel) {
         showLoader(true)
+
         viewModelScope.launch(Dispatchers.IO) {
-            delay(1000) // Simulate workflow
+            delay(1000)
             moviesRepository.saveItem(item)
-            val data = _itemsResource.value?.data?.map {
-                if(it.id == item.id) it.saved = true
-                it
-            }
-            _itemsResource.postValue(Resource.Success(data))
             showLoader(false)
+        }.invokeOnCompletion {
+            viewModelScope.launch(Dispatchers.IO) {
+                fetchItemsResource()
+            }
         }
     }
 

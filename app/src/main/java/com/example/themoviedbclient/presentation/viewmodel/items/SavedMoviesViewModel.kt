@@ -44,6 +44,7 @@ class SavedMoviesViewModel @Inject constructor(
     override suspend fun fetchSavedItems() {
         showLoader(true)
         viewModelScope.launch(Dispatchers.IO) {
+            delay(1000)
             _items.postValue(savedMoviesRepository.getSavedItems())
             showLoader(false)
         }
@@ -54,8 +55,11 @@ class SavedMoviesViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             delay(1000)
             savedMoviesRepository.deleteItem(item)
-            _items.postValue(_items.value?.filter { it.id != item.id } )
             showLoader(false)
+        }.invokeOnCompletion {
+            viewModelScope.launch(Dispatchers.IO) {
+                fetchSavedItems()
+            }
         }
     }
 }
